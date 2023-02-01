@@ -1,0 +1,44 @@
+﻿using Microsoft.EntityFrameworkCore;
+using WinterIsComing.Infrastructure.Data;
+using WinterIsComing.Infrastructure.Data.Models;
+
+namespace Microsoft.Extensions.DependencyInjection
+{
+    public static class WinterIsComingServiceCollectionExtensions
+    {
+        public static IServiceCollection AddApplicationServices(this IServiceCollection services) 
+        {
+            return services;
+        }
+
+        public static IServiceCollection AddDbContext(this IServiceCollection services, IConfiguration configuration) 
+        {
+            var connectionString = configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(connectionString)
+                .UseLazyLoadingProxies());
+
+            return services;
+        }
+
+        public static void ConfigureCors(this IServiceCollection services) 
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("all", opt =>
+                {
+                    opt.AllowAnyOrigin();
+                    opt.AllowAnyMethod();
+                });
+            });
+        }
+
+        public static IServiceCollection AddIdentity(this IServiceCollection services) 
+        {
+            services.AddIdentityCore<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
+                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            return services;
+        }
+    }
+}

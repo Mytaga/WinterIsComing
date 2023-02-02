@@ -34,6 +34,10 @@ namespace WinterIsComing.Infrastructure.Data.Models
 
         public int Likes { get; set; }
 
+        public int NumberOfSlopes { get; set; }
+
+        public double SkiAreaSizes { get; set; }
+
         [Required]
         [ForeignKey(nameof(Country))]
         public string CountryId { get; set; } = null!;

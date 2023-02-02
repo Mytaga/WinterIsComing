@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WinterIsComing.Infrastructure.Data;
 
@@ -11,9 +12,10 @@ using WinterIsComing.Infrastructure.Data;
 namespace WinterIsComing.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230202122545_SeedCountries")]
+    partial class SeedCountries
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -366,103 +368,11 @@ namespace WinterIsComing.Infrastructure.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("NumberOfSlopes")
-                        .HasColumnType("int");
-
-                    b.Property<double>("SkiAreaSizes")
-                        .HasColumnType("float");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CountryId");
 
                     b.ToTable("Resorts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "7f412e7c-3999-476e-8f5f-a7a14440ea4b",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Bansko is the biggest ski resort in Bulgaria located in the Pirin mountain. It hosts FIS World Cup alpine ski races.",
-                            Elevation = "2600",
-                            ImageUrl = "https://www.skibansko.bg/wp-content/uploads/2016/06/bansko-ski-runs.jpg",
-                            Likes = 0,
-                            Name = "Bansko",
-                            NumberOfSlopes = 20,
-                            SkiAreaSizes = 75.0
-                        },
-                        new
-                        {
-                            Id = "be4598ef-38d2-4acb-bf23-8b859d4a2b21",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Borovets is the second biggest ski resort in Bulgaria located in the Rila mountain.It offers night skiing.",
-                            Elevation = "2500",
-                            ImageUrl = "https://www.skiborovets.bg/wp-content/uploads/2016/08/borovets-night-skiing.jpg",
-                            Likes = 0,
-                            Name = "Borovets",
-                            NumberOfSlopes = 27,
-                            SkiAreaSizes = 58.0
-                        },
-                        new
-                        {
-                            Id = "4b604930-85d7-44d5-9d4b-4844d1745742",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Pamporovo is located in the Rhodope mountain. It offers warm hospitality and is very suitable for beginners.",
-                            Elevation = "1920",
-                            ImageUrl = "https://www.igluski.com/images/_i60381238.jpg",
-                            Likes = 0,
-                            Name = "Pamporovo",
-                            NumberOfSlopes = 20,
-                            SkiAreaSizes = 36.799999999999997
-                        },
-                        new
-                        {
-                            Id = "bd83c318-a14f-4113-9408-0d71d19beb98",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Vitosha is located just 20km away from Sofia city center.Unfortunately most of the lifts are abandoned and few are working.",
-                            Elevation = "2200",
-                            ImageUrl = "https://www.skiresort.info/fileadmin/_processed_/29/94/4a/a0/ba07658242.jpg",
-                            Likes = 0,
-                            Name = "Vitosha",
-                            NumberOfSlopes = 12,
-                            SkiAreaSizes = 36.799999999999997
-                        },
-                        new
-                        {
-                            Id = "4b94a373-e809-4f52-90c2-af49ed73cb30",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Kartala is located close to Blagoevgrad in the Rila mountain. Not a lot of slopes but good for freeride.",
-                            Elevation = "2350",
-                            ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/264298818.jpg?k=4440ca22573b7d33266f7fe7f6f73e764a206d4c05019de0fcf3355718265ea5&o=&hp=1",
-                            Likes = 0,
-                            Name = "Kartala",
-                            NumberOfSlopes = 2,
-                            SkiAreaSizes = 5.0
-                        },
-                        new
-                        {
-                            Id = "79e82d3d-7482-4ffe-8c1c-55a0e47798ec",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Bezbog is located in the Pirin mountain next to Bansko. There is only one slope but is a favourite site for freeride and backcountry.",
-                            Elevation = "2240",
-                            ImageUrl = "https://bulgariaview.com/view/albums/17/46.jpg",
-                            Likes = 0,
-                            Name = "Bezbog",
-                            NumberOfSlopes = 1,
-                            SkiAreaSizes = 5.0
-                        },
-                        new
-                        {
-                            Id = "239fb5bc-f32a-44ff-ad30-992feda18a41",
-                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
-                            Description = "Malyovitsa is located in the Rila mountain. There are no lifts just rope tows. It's good for freeride.",
-                            Elevation = "2000",
-                            ImageUrl = "https://4vlast-bg.com/wp-content/uploads/2021/01/89911107_166885198185957_7272630966554722304_o.jpg",
-                            Likes = 0,
-                            Name = "Malyovitsa",
-                            NumberOfSlopes = 2,
-                            SkiAreaSizes = 4.0
-                        });
                 });
 
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.UserResort", b =>

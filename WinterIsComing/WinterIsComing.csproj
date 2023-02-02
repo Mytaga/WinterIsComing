@@ -32,8 +32,4 @@
     <ProjectReference Include="..\WinterIsComing.Infrastructure\WinterIsComing.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>

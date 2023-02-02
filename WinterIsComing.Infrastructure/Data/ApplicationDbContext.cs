@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using WinterIsComing.Infrastructure.Data.Configurations;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Infrastructure.Data
@@ -9,7 +10,6 @@ namespace WinterIsComing.Infrastructure.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
-
         }
 
         public virtual DbSet<Country> Countries { get; set; } = null!;
@@ -21,6 +21,9 @@ namespace WinterIsComing.Infrastructure.Data
         {
             builder.Entity<UserResort>()
                 .HasKey(ur => new { ur.ResortId, ur.AppUserId });
+
+            builder.ApplyConfiguration(new CountryConfiguration());
+            builder.ApplyConfiguration(new ResortConfiguration());
 
             base.OnModelCreating(builder);
         }

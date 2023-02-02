@@ -1,6 +1,6 @@
 ﻿namespace WinterIsComing.Infrastructure.Data.Enums
 {
-    public enum Type
+    public enum PassType
     {
         HalfDay = 0,
         FullDay = 1,

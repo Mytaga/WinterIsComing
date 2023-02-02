@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterIsComing", "WinterIsComing\WinterIsComing.csproj", "{8602491C-511D-45A2-B9F3-B78A74363F22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterIsComing", "WinterIsComing\WinterIsComing.csproj", "{8602491C-511D-45A2-B9F3-B78A74363F22}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterIsComing.Infrastructure", "WinterIsComing.Infrastructure\WinterIsComing.Infrastructure.csproj", "{AED95D51-FF85-4F49-A082-2E0BBD1F9F4A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinterIsComing.Infrastructure", "WinterIsComing.Infrastructure\WinterIsComing.Infrastructure.csproj", "{AED95D51-FF85-4F49-A082-2E0BBD1F9F4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterIsComing.Core", "WinterIsComing.Core\WinterIsComing.Core.csproj", "{F3F8D7C7-2C40-4BEA-A49E-9C23585C850D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinterIsComing.Common", "WinterIsComing.Common\WinterIsComing.Common.csproj", "{988DEB90-6534-42B9-817A-4F43FC5FB461}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{AED95D51-FF85-4F49-A082-2E0BBD1F9F4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AED95D51-FF85-4F49-A082-2E0BBD1F9F4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AED95D51-FF85-4F49-A082-2E0BBD1F9F4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F8D7C7-2C40-4BEA-A49E-9C23585C850D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F8D7C7-2C40-4BEA-A49E-9C23585C850D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F8D7C7-2C40-4BEA-A49E-9C23585C850D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F8D7C7-2C40-4BEA-A49E-9C23585C850D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{988DEB90-6534-42B9-817A-4F43FC5FB461}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{988DEB90-6534-42B9-817A-4F43FC5FB461}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{988DEB90-6534-42B9-817A-4F43FC5FB461}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{988DEB90-6534-42B9-817A-4F43FC5FB461}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

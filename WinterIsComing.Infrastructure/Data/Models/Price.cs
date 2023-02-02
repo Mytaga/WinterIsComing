@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using WinterIsComing.Infrastructure.Data.Enums;
 
 namespace WinterIsComing.Infrastructure.Data.Models
 {
@@ -17,7 +18,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
         public decimal Value { get; set; }
 
         [Required]
-        public Type PassType { get; set; } = null!;
+        public PassType PassType { get; set; }
 
         [Required]
         [ForeignKey(nameof(Resort))]

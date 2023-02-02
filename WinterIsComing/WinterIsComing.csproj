@@ -27,6 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\WinterIsComing.Common\WinterIsComing.Common.csproj" />
+    <ProjectReference Include="..\WinterIsComing.Core\WinterIsComing.Core.csproj" />
     <ProjectReference Include="..\WinterIsComing.Infrastructure\WinterIsComing.Infrastructure.csproj" />
   </ItemGroup>
 

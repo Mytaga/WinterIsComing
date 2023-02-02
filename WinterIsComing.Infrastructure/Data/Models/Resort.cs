@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static WinterIsComing.Common.Constants.ModelValidationConstants;
 
 namespace WinterIsComing.Infrastructure.Data.Models
 {
@@ -7,28 +8,28 @@ namespace WinterIsComing.Infrastructure.Data.Models
     {
         public Resort()
         {
-            Id = Guid.NewGuid().ToString();
-            Users = new HashSet<AppUser>();
-            LiftPassPrices = new HashSet<Price>();
+            this.Id = Guid.NewGuid().ToString();
+            this.Users = new HashSet<AppUser>();
+            this.LiftPassPrices = new HashSet<Price>();
         }
 
         [Key]
         public string Id { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(ResortValidation.NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
-        [StringLength(4)]
+        [StringLength(ResortValidation.ElevationMaxLength)]
         public string Elevation { get; set; } = null!;
 
         [Required]
-        [StringLength(150)]
+        [StringLength(ResortValidation.DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
         [Required]
-        [StringLength(100)]
+        [StringLength(ResortValidation.ImageUrlMaxLength)]
         public string ImageUrl { get; set;} = null!;
 
         public int Likes { get; set; }

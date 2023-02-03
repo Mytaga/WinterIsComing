@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using WinterIsComing.Infrastructure.Data.Models;
+using static System.Net.WebRequestMethods;
 
 namespace WinterIsComing.Infrastructure.Data.Configurations
 {
@@ -91,6 +92,18 @@ namespace WinterIsComing.Infrastructure.Data.Configurations
                 ImageUrl = "https://4vlast-bg.com/wp-content/uploads/2021/01/89911107_166885198185957_7272630966554722304_o.jpg",
                 NumberOfSlopes = 2,
                 SkiAreaSizes = 4,
+                CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
+            });
+
+            builder.HasData(new Resort
+            {
+                Id = "2d5a0fa8-fcb9-46d7-8f19-01f5fb543116",
+                Name = "Rila Lakes",
+                Elevation = "2300",
+                Description = "Rila Lakes is located in the Rila mountain. There is one slow lift and one rope tows. It's good for freeride and backcountry.",
+                ImageUrl = "https://www.360mag.bg/wp-content/uploads/2016/12/bg-kurorti-rilski-ezera.jpg",
+                NumberOfSlopes = 2,
+                SkiAreaSizes = 3,
                 CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
             });
         }

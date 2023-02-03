@@ -24,6 +24,7 @@ namespace WinterIsComing.Infrastructure.Data
 
             builder.ApplyConfiguration(new CountryConfiguration());
             builder.ApplyConfiguration(new ResortConfiguration());
+            builder.ApplyConfiguration(new PriceConfiguration());
 
             base.OnModelCreating(builder);
         }

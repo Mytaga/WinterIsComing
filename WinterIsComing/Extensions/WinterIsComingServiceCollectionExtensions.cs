@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using WinterIsComing.Core.Contracts;
+using WinterIsComing.Core.Services;
 using WinterIsComing.Infrastructure.Data;
+using WinterIsComing.Infrastructure.Data.Common;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -8,6 +11,8 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static IServiceCollection AddApplicationServices(this IServiceCollection services) 
         {
+            services.AddScoped<IResortService, ResortService>();
+
             return services;
         }
 
@@ -17,6 +22,8 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString)
                 .UseLazyLoadingProxies());
+
+            services.AddScoped<IRepository, Repository>();
 
             return services;
         }

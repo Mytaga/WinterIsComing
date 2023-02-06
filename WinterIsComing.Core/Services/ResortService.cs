@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
 using WinterIsComing.Infrastructure.Data.Common;
@@ -9,10 +10,12 @@ namespace WinterIsComing.Core.Services
     public class ResortService : IResortService
     {
         private readonly IRepository repo;
+        private readonly UserManager<AppUser> userManager;
 
-        public ResortService(IRepository repo)
+        public ResortService(IRepository repo, UserManager<AppUser> userManager)
         {
             this.repo = repo;
+            this.userManager = userManager;
         }
 
         public async Task<AllResortsDto> GetAllAsync(string? country = null, string? searchQuery = null)
@@ -54,6 +57,44 @@ namespace WinterIsComing.Core.Services
             }
 
             return result;
+        }
+
+        public async Task<Resort> GetByIdAsync(string id)
+        {
+            return await this.repo
+                .All<Resort>()
+                .FirstOrDefaultAsync(r => r.Id == id);
+        }
+
+        public async Task LikeResort(Resort resort, string UserId)
+        {
+            resort.Likes++;
+            var user = await this.userManager.FindByIdAsync(UserId);  
+
+            if (user != null) 
+            {
+                resort.Users.Add(user);
+            }
+
+            this.repo.Update(resort);
+
+            await this.repo.SaveChangesAsync();
+        }
+
+
+        public async Task UnlikeResort(Resort resort, string UserId)
+        {
+            resort.Likes--;
+            var user = await this.userManager.FindByIdAsync(UserId);
+
+            if (user != null)
+            {
+                resort.Users.Remove(user);
+            }
+
+            this.repo.Update(resort);
+
+            await this.repo.SaveChangesAsync();
         }
 
         public async Task<ICollection<ResortPriceDto>> LoadResortPrices(string id)

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Services;
 using WinterIsComing.Infrastructure.Data;
@@ -43,9 +44,11 @@ namespace Microsoft.Extensions.DependencyInjection
         public static IServiceCollection AddIdentity(this IServiceCollection services) 
         {
             services.AddIdentityCore<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             return services;
         }
+
     }
 }

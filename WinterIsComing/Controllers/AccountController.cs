@@ -23,12 +23,12 @@ namespace WinterIsComing.Controllers
         {
             if (!this.ModelState.IsValid)
             {
-                return Ok();
+                return BadRequest(ModelState);
             }
 
             var user = new AppUser()
             {
-                Email = model.Email,
+                Email = model.Email, 
                 EmailConfirmed = true,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -49,6 +49,5 @@ namespace WinterIsComing.Controllers
 
             return this.StatusCode(201);
         }
-
     }
 }

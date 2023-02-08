@@ -81,7 +81,6 @@ namespace WinterIsComing.Core.Services
             await this.repo.SaveChangesAsync();
         }
 
-
         public async Task UnlikeResort(Resort resort, string UserId)
         {
             resort.Likes--;

@@ -43,7 +43,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IServiceCollection AddIdentity(this IServiceCollection services) 
         {
-            services.AddIdentityCore<AppUser>(IdentityOptionsProvider.GetIdentityOptions)
+            services.AddIdentity<AppUser, IdentityRole>(IdentityOptionsProvider.GetIdentityOptions)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 

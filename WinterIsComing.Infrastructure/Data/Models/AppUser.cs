@@ -21,7 +21,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
         public string LastName { get; set; } = null!;
 
         [StringLength(AppUserValidation.ImageUrlMaxLength)]
-        public string ImageUrl { get; set; } = null!;
+        public string? ImageUrl { get; set; } 
 
         public virtual ICollection<Resort> FavouriteResorts { get; set; }
     }

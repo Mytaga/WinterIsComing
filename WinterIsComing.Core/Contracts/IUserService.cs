@@ -1,4 +1,6 @@
-﻿using WinterIsComing.Infrastructure.Data.Models;
+﻿using Microsoft.AspNetCore.Identity;
+using WinterIsComing.Core.Models;
+using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Core.Contracts
 {
@@ -7,5 +9,7 @@ namespace WinterIsComing.Core.Contracts
         Task<AppUser> Authenticate(string email, string password);
 
         string GenerateJSONWebToken(AppUser user);
+
+        Task<IdentityResult> Register(RegisterDto model);
     }       
 }

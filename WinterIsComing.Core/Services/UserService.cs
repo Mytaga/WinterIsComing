@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WinterIsComing.Core.Models;
 
 namespace WinterIsComing.Core.Services
 {
@@ -52,6 +53,22 @@ namespace WinterIsComing.Core.Services
                 
 
             return new JwtSecurityTokenHandler().WriteToken(token); 
+        }
+
+        public async Task<IdentityResult> Register(RegisterDto model)
+        {
+            var user = new AppUser()
+            {
+                Email = model.Email,
+                EmailConfirmed = true,
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                UserName = model.Username,
+            };
+
+            var result = await this.userManager.CreateAsync(user, model.Password);
+
+            return result;
         }
     }
 }

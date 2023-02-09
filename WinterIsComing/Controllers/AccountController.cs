@@ -10,13 +10,13 @@ namespace WinterIsComing.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<AppUser> userManager;
         private readonly IUserService userService;
+        private readonly SignInManager<AppUser> signInManager;
 
-        public AccountController(UserManager<AppUser> userManager, IUserService userService)
+        public AccountController(IUserService userService, SignInManager<AppUser> signInManager)
         {
-            this.userManager = userManager;
             this.userService = userService;
+            this.signInManager = signInManager;
         }
 
         [HttpPost("Register")]
@@ -27,32 +27,17 @@ namespace WinterIsComing.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new AppUser()
-            {
-                Email = model.Email,
-                EmailConfirmed = true,
-                FirstName = model.FirstName,
-                LastName = model.LastName,
-                UserName = model.Username,
-            };
-
-            var result = await this.userManager.CreateAsync(user, model.Password);
+            var result = await this.userService.Register(model);
 
             if (!result.Succeeded)
             {
                 return Ok(result.Errors);
             }
 
-            foreach (var item in result.Errors)
-            {
-                this.ModelState.AddModelError(string.Empty, item.Description);
-            }
-
             return this.StatusCode(201);
         }
 
         [HttpPost("Login")]
-
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             var user = await this.userService.Authenticate(model.Email, model.Password);
@@ -65,6 +50,14 @@ namespace WinterIsComing.Controllers
             var tokenString = this.userService.GenerateJSONWebToken(user);
 
             return Ok( new { token = tokenString });    
+        }
+
+        [HttpPost("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await this.signInManager.SignOutAsync();
+
+            return Ok(200);
         }
     }
 }

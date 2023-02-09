@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
 using WinterIsComing.Infrastructure.Data.Common;
@@ -66,28 +67,28 @@ namespace WinterIsComing.Core.Services
                 .FirstOrDefaultAsync(r => r.Id == id);
         }
 
-        public async Task LikeResort(Resort resort, string UserId)
+        public async Task LikeResort(Resort resort, string userId)
         {
-            resort.Likes++;
-            var user = await this.userManager.FindByIdAsync(UserId);  
+            var user = await this.userManager.FindByIdAsync(userId);  
 
-            if (user != null) 
+            if (!resort.Users.Any(u => u.Id == userId)) 
             {
+                resort.Likes++;
                 resort.Users.Add(user);
-            }
+            };
 
             this.repo.Update(resort);
 
             await this.repo.SaveChangesAsync();
         }
 
-        public async Task UnlikeResort(Resort resort, string UserId)
+        public async Task UnlikeResort(Resort resort, string userId)
         {
-            resort.Likes--;
-            var user = await this.userManager.FindByIdAsync(UserId);
+            var user = await this.userManager.FindByIdAsync(userId);
 
-            if (user != null)
+            if (resort.Users.Any(u => u.Id == userId))
             {
+                resort.Likes--;
                 resort.Users.Remove(user);
             }
 
@@ -108,6 +109,35 @@ namespace WinterIsComing.Core.Services
                 })
                 .OrderBy(p => p.Price)
                 .ToListAsync();
+
+            return result;
+        }
+
+        public async Task<AllResortsDto> GetLikedAsync(string userId)
+        {
+            var result = new AllResortsDto();
+
+            var resorts = this.repo.AllReadonly<Resort>().Where(r => r.Users.Any(u => u.Id == userId));
+
+            result.Resorts = await resorts
+               .Select(r => new ResortDto
+               {
+                   Id = r.Id,
+                   Name = r.Name,
+                   Elevation = r.Elevation,
+                   Description = r.Description,
+                   ImageUrl = r.ImageUrl,
+                   Likes = r.Likes,
+                   NumberOfSlopes = r.NumberOfSlopes,
+                   SkiAreaSizes = r.SkiAreaSizes,
+                   CountryName = r.Country.Name,
+               })
+               .ToListAsync();
+
+            foreach (var resort in result.Resorts)
+            {
+                resort.LiftPrices = await this.LoadResortPrices(resort.Id);
+            }
 
             return result;
         }

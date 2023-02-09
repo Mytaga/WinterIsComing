@@ -26,6 +26,23 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetLiked")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetLiked()
+        {
+            var userId = this.User.Id();
+            var result = await this.resortService.GetLikedAsync(userId);
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
+        }
+
         [HttpPatch("Like/{id}")]
         public async Task<IActionResult> LikeResort(string id)
         {

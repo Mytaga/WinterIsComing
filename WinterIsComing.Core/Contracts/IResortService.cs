@@ -10,10 +10,12 @@ namespace WinterIsComing.Core.Contracts
 
         Task<ICollection<ResortPriceDto>> LoadResortPrices(string id);
 
-        Task LikeResort(Resort resort, string UserId);
+        Task LikeResort(Resort resort, string userId);
 
-        Task UnlikeResort(Resort resort, string UserId);
+        Task UnlikeResort(Resort resort, string userId);
 
         Task<Resort> GetByIdAsync(string id);
+
+        Task<AllResortsDto> GetLikedAsync(string userId);
     }
 }

@@ -10,6 +10,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
         {
             this.Id = Guid.NewGuid().ToString();
             this.FavouriteResorts = new HashSet<Resort>();
+            this.Likes = new HashSet<Like>();
         }
 
         [Required]
@@ -24,5 +25,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
         public string? ImageUrl { get; set; } 
 
         public virtual ICollection<Resort> FavouriteResorts { get; set; }
+
+        public virtual ICollection<Like> Likes { get; set; }
     }
 }

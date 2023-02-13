@@ -16,6 +16,7 @@ namespace WinterIsComing.Infrastructure.Data
         public virtual DbSet<Resort> Resorts { get; set; } = null!;
         public virtual DbSet<Price> Prices { get; set; } = null!;
         public virtual DbSet<UserResort> UserResorts { get; set; } = null!;
+        public virtual DbSet<Like> Likes { get; set; } = null!; 
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

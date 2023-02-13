@@ -45,7 +45,6 @@ namespace WinterIsComing.Core.Services
                     Elevation = r.Elevation,
                     Description = r.Description,
                     ImageUrl = r.ImageUrl,
-                    Likes = r.Likes,
                     NumberOfSlopes = r.NumberOfSlopes,
                     SkiAreaSizes = r.SkiAreaSizes,
                     CountryName = r.Country.Name,
@@ -73,7 +72,6 @@ namespace WinterIsComing.Core.Services
 
             if (!resort.Users.Any(u => u.Id == userId)) 
             {
-                resort.Likes++;
                 resort.Users.Add(user);
             };
 
@@ -88,7 +86,6 @@ namespace WinterIsComing.Core.Services
 
             if (resort.Users.Any(u => u.Id == userId))
             {
-                resort.Likes--;
                 resort.Users.Remove(user);
             }
 
@@ -127,7 +124,6 @@ namespace WinterIsComing.Core.Services
                    Elevation = r.Elevation,
                    Description = r.Description,
                    ImageUrl = r.ImageUrl,
-                   Likes = r.Likes,
                    NumberOfSlopes = r.NumberOfSlopes,
                    SkiAreaSizes = r.SkiAreaSizes,
                    CountryName = r.Country.Name,

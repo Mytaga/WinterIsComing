@@ -11,6 +11,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
             this.Id = Guid.NewGuid().ToString();
             this.Users = new HashSet<AppUser>();
             this.LiftPassPrices = new HashSet<Price>();
+            this.Likes = new HashSet<Like>();
         }
 
         [Key]
@@ -32,8 +33,6 @@ namespace WinterIsComing.Infrastructure.Data.Models
         [StringLength(ResortValidation.ImageUrlMaxLength)]
         public string ImageUrl { get; set;} = null!;
 
-        public int Likes { get; set; }
-
         public int NumberOfSlopes { get; set; }
 
         public double SkiAreaSizes { get; set; }
@@ -47,5 +46,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
         public virtual ICollection<AppUser> Users { get; set; }
 
         public virtual ICollection<Price> LiftPassPrices { get; set; }
+
+        public virtual ICollection<Like> Likes { get; set; }    
     }
 }

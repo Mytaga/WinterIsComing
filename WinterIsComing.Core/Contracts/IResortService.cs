@@ -17,5 +17,7 @@ namespace WinterIsComing.Core.Contracts
         Task<Resort> GetByIdAsync(string id);
 
         Task<AllResortsDto> GetLikedAsync(string userId);
+
+        Task<ICollection<Like>> LoadAllResortLikesAsync(string resortId);
     }
 }

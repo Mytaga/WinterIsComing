@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
 using WinterIsComing.Infrastructure.Data.Common;
@@ -44,6 +43,7 @@ namespace WinterIsComing.Core.Services
                     Name = r.Name,
                     Elevation = r.Elevation,
                     Description = r.Description,
+                    Likes = r.Likes.Count(),
                     ImageUrl = r.ImageUrl,
                     NumberOfSlopes = r.NumberOfSlopes,
                     SkiAreaSizes = r.SkiAreaSizes,
@@ -68,10 +68,18 @@ namespace WinterIsComing.Core.Services
 
         public async Task LikeResort(Resort resort, string userId)
         {
-            var user = await this.userManager.FindByIdAsync(userId);  
+            var user = await this.userManager.FindByIdAsync(userId);
+            var likes = await this.LoadAllResortLikesAsync(resort.Id);
 
-            if (!resort.Users.Any(u => u.Id == userId)) 
+            if (!likes.Any(l => l.AppUserId == userId)) 
             {
+                Like like = new Like
+                {
+                    AppUserId = userId,
+                    ResortId = resort.Id,
+                };
+
+                resort.Likes.Add(like); 
                 resort.Users.Add(user);
             };
 
@@ -83,10 +91,14 @@ namespace WinterIsComing.Core.Services
         public async Task UnlikeResort(Resort resort, string userId)
         {
             var user = await this.userManager.FindByIdAsync(userId);
+            var likes = await this.LoadAllResortLikesAsync(resort.Id);
 
-            if (resort.Users.Any(u => u.Id == userId))
+            if (likes.Any(l => l.AppUserId == userId))
             {
+                var like = likes.FirstOrDefault(l => l.AppUserId == userId);
+                resort.Likes.Remove(like);
                 resort.Users.Remove(user);
+                this.repo.Delete<Like>(like);
             }
 
             this.repo.Update(resort);
@@ -124,6 +136,7 @@ namespace WinterIsComing.Core.Services
                    Elevation = r.Elevation,
                    Description = r.Description,
                    ImageUrl = r.ImageUrl,
+                   Likes = r.Likes.Count(),
                    NumberOfSlopes = r.NumberOfSlopes,
                    SkiAreaSizes = r.SkiAreaSizes,
                    CountryName = r.Country.Name,
@@ -136,6 +149,16 @@ namespace WinterIsComing.Core.Services
             }
 
             return result;
+        }
+
+        public async Task<ICollection<Like>> LoadAllResortLikesAsync(string resortId)
+        {
+            var likes = await this.repo
+                .AllReadonly<Like>()
+                .Where(l => l.ResortId == resortId)
+                .ToListAsync();
+
+            return likes;
         }
     }
 }

@@ -622,21 +622,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.UserResort", b =>
-                {
-                    b.Property<string>("ResortId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ResortId", "AppUserId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("UserResorts");
-                });
-
             modelBuilder.Entity("AppUserResort", b =>
                 {
                     b.HasOne("WinterIsComing.Infrastructure.Data.Models.Resort", null)
@@ -742,25 +727,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Country");
-                });
-
-            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.UserResort", b =>
-                {
-                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.Resort", "Resort")
-                        .WithMany()
-                        .HasForeignKey("ResortId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Resort");
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.AppUser", b =>

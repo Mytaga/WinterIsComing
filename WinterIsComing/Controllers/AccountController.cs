@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
@@ -49,9 +50,12 @@ namespace WinterIsComing.Controllers
 
             var tokenString = this.userService.GenerateJSONWebToken(user);
 
+            await this.signInManager.SignInAsync(user, true);
+
             return Ok( new { token = tokenString });    
         }
 
+        [Authorize]
         [HttpPost("Logout")]
         public async Task<IActionResult> Logout()
         {

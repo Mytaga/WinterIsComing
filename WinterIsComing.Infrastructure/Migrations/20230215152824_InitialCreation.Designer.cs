@@ -12,8 +12,8 @@ using WinterIsComing.Infrastructure.Data;
 namespace WinterIsComing.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230202133427_SeedBulgarianResorts")]
-    partial class SeedBulgarianResorts
+    [Migration("20230215152824_InitialCreation")]
+    partial class InitialCreation
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -197,7 +197,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -314,6 +313,28 @@ namespace WinterIsComing.Infrastructure.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Like", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ResortId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("ResortId");
+
+                    b.ToTable("Likes");
+                });
+
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Price", b =>
                 {
                     b.Property<string>("Id")
@@ -334,6 +355,141 @@ namespace WinterIsComing.Infrastructure.Migrations
                     b.HasIndex("ResortId");
 
                     b.ToTable("Prices");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "d2477f38-8927-4c5e-a875-1e617d167871",
+                            PassType = 1,
+                            ResortId = "7f412e7c-3999-476e-8f5f-a7a14440ea4b",
+                            Value = 90m
+                        },
+                        new
+                        {
+                            Id = "59f29a21-69eb-47b2-ab5f-760050e3330d",
+                            PassType = 0,
+                            ResortId = "7f412e7c-3999-476e-8f5f-a7a14440ea4b",
+                            Value = 70m
+                        },
+                        new
+                        {
+                            Id = "9c587e25-5941-496c-aa6d-c2bc688a8877",
+                            PassType = 2,
+                            ResortId = "7f412e7c-3999-476e-8f5f-a7a14440ea4b",
+                            Value = 1700m
+                        },
+                        new
+                        {
+                            Id = "09c02bc4-5ba9-43ee-b79f-dc18842c8e0b",
+                            PassType = 1,
+                            ResortId = "be4598ef-38d2-4acb-bf23-8b859d4a2b21",
+                            Value = 85m
+                        },
+                        new
+                        {
+                            Id = "b8816896-8c30-49b1-9173-a8c0cf70dd39",
+                            PassType = 0,
+                            ResortId = "be4598ef-38d2-4acb-bf23-8b859d4a2b21",
+                            Value = 70m
+                        },
+                        new
+                        {
+                            Id = "08050311-981e-4e03-8837-95c550c92a2e",
+                            PassType = 2,
+                            ResortId = "be4598ef-38d2-4acb-bf23-8b859d4a2b21",
+                            Value = 1500m
+                        },
+                        new
+                        {
+                            Id = "5e9370d6-fc61-4c39-b33b-1d83e85e40a1",
+                            PassType = 1,
+                            ResortId = "4b604930-85d7-44d5-9d4b-4844d1745742",
+                            Value = 85m
+                        },
+                        new
+                        {
+                            Id = "c799e62e-50f3-441f-8c4a-26fae8db5339",
+                            PassType = 0,
+                            ResortId = "4b604930-85d7-44d5-9d4b-4844d1745742",
+                            Value = 63m
+                        },
+                        new
+                        {
+                            Id = "ebc0e4f5-8eaf-45a1-8797-85220f027593",
+                            PassType = 2,
+                            ResortId = "4b604930-85d7-44d5-9d4b-4844d1745742",
+                            Value = 1530m
+                        },
+                        new
+                        {
+                            Id = "374705e6-309f-4ec0-9936-4c1cc15c527a",
+                            PassType = 1,
+                            ResortId = "bd83c318-a14f-4113-9408-0d71d19beb98",
+                            Value = 50m
+                        },
+                        new
+                        {
+                            Id = "3d25295a-76b4-4a6e-ac2b-ccc75f50bbfd",
+                            PassType = 0,
+                            ResortId = "bd83c318-a14f-4113-9408-0d71d19beb98",
+                            Value = 40m
+                        },
+                        new
+                        {
+                            Id = "baf8f5d8-583d-4815-af0b-a0027b2e46f5",
+                            PassType = 2,
+                            ResortId = "bd83c318-a14f-4113-9408-0d71d19beb98",
+                            Value = 650m
+                        },
+                        new
+                        {
+                            Id = "dd8ca596-0912-4a6e-8479-8d966962a23e",
+                            PassType = 1,
+                            ResortId = "4b94a373-e809-4f52-90c2-af49ed73cb30",
+                            Value = 60m
+                        },
+                        new
+                        {
+                            Id = "93b23e49-c762-47df-813f-046012736838",
+                            PassType = 0,
+                            ResortId = "4b94a373-e809-4f52-90c2-af49ed73cb30",
+                            Value = 45m
+                        },
+                        new
+                        {
+                            Id = "827d687e-6ca8-417a-b16c-42b5a93f25c8",
+                            PassType = 1,
+                            ResortId = "79e82d3d-7482-4ffe-8c1c-55a0e47798ec",
+                            Value = 47m
+                        },
+                        new
+                        {
+                            Id = "626ce16f-e1e6-4e1b-bb43-08253a60717b",
+                            PassType = 1,
+                            ResortId = "239fb5bc-f32a-44ff-ad30-992feda18a41",
+                            Value = 25m
+                        },
+                        new
+                        {
+                            Id = "29f08d0a-bf1e-44ca-93af-ce05b2832275",
+                            PassType = 0,
+                            ResortId = "239fb5bc-f32a-44ff-ad30-992feda18a41",
+                            Value = 18m
+                        },
+                        new
+                        {
+                            Id = "515cd33d-742a-40b3-a664-b5a1136c988a",
+                            PassType = 1,
+                            ResortId = "2d5a0fa8-fcb9-46d7-8f19-01f5fb543116",
+                            Value = 40m
+                        },
+                        new
+                        {
+                            Id = "bbda776e-f33a-43a0-9b58-9657785b39f2",
+                            PassType = 0,
+                            ResortId = "2d5a0fa8-fcb9-46d7-8f19-01f5fb543116",
+                            Value = 30m
+                        });
                 });
 
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Resort", b =>
@@ -360,9 +516,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<int>("Likes")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -388,7 +541,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Bansko is the biggest ski resort in Bulgaria located in the Pirin mountain. It hosts FIS World Cup alpine ski races.",
                             Elevation = "2600",
                             ImageUrl = "https://www.skibansko.bg/wp-content/uploads/2016/06/bansko-ski-runs.jpg",
-                            Likes = 0,
                             Name = "Bansko",
                             NumberOfSlopes = 20,
                             SkiAreaSizes = 75.0
@@ -400,7 +552,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Borovets is the second biggest ski resort in Bulgaria located in the Rila mountain.It offers night skiing.",
                             Elevation = "2500",
                             ImageUrl = "https://www.skiborovets.bg/wp-content/uploads/2016/08/borovets-night-skiing.jpg",
-                            Likes = 0,
                             Name = "Borovets",
                             NumberOfSlopes = 27,
                             SkiAreaSizes = 58.0
@@ -412,7 +563,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Pamporovo is located in the Rhodope mountain. It offers warm hospitality and is very suitable for beginners.",
                             Elevation = "1920",
                             ImageUrl = "https://www.igluski.com/images/_i60381238.jpg",
-                            Likes = 0,
                             Name = "Pamporovo",
                             NumberOfSlopes = 20,
                             SkiAreaSizes = 36.799999999999997
@@ -424,7 +574,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Vitosha is located just 20km away from Sofia city center.Unfortunately most of the lifts are abandoned and few are working.",
                             Elevation = "2200",
                             ImageUrl = "https://www.skiresort.info/fileadmin/_processed_/29/94/4a/a0/ba07658242.jpg",
-                            Likes = 0,
                             Name = "Vitosha",
                             NumberOfSlopes = 12,
                             SkiAreaSizes = 36.799999999999997
@@ -435,8 +584,7 @@ namespace WinterIsComing.Infrastructure.Migrations
                             CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
                             Description = "Kartala is located close to Blagoevgrad in the Rila mountain. Not a lot of slopes but good for freeride.",
                             Elevation = "2350",
-                            ImageUrl = "https://cf.bstatic.com/xdata/images/hotel/max1024x768/264298818.jpg?k=4440ca22573b7d33266f7fe7f6f73e764a206d4c05019de0fcf3355718265ea5&o=&hp=1",
-                            Likes = 0,
+                            ImageUrl = "https://bg.nexustrace.com/wp-content/uploads/2020/11/kartala-2.jpg",
                             Name = "Kartala",
                             NumberOfSlopes = 2,
                             SkiAreaSizes = 5.0
@@ -448,7 +596,6 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Bezbog is located in the Pirin mountain next to Bansko. There is only one slope but is a favourite site for freeride and backcountry.",
                             Elevation = "2240",
                             ImageUrl = "https://bulgariaview.com/view/albums/17/46.jpg",
-                            Likes = 0,
                             Name = "Bezbog",
                             NumberOfSlopes = 1,
                             SkiAreaSizes = 5.0
@@ -460,26 +607,21 @@ namespace WinterIsComing.Infrastructure.Migrations
                             Description = "Malyovitsa is located in the Rila mountain. There are no lifts just rope tows. It's good for freeride.",
                             Elevation = "2000",
                             ImageUrl = "https://4vlast-bg.com/wp-content/uploads/2021/01/89911107_166885198185957_7272630966554722304_o.jpg",
-                            Likes = 0,
                             Name = "Malyovitsa",
                             NumberOfSlopes = 2,
                             SkiAreaSizes = 4.0
+                        },
+                        new
+                        {
+                            Id = "2d5a0fa8-fcb9-46d7-8f19-01f5fb543116",
+                            CountryId = "3e6773cb-dd81-4f92-91a6-05816ba80c07",
+                            Description = "Rila Lakes is located in the Rila mountain. There is one slow lift and one rope tows. It's good for freeride and backcountry.",
+                            Elevation = "2300",
+                            ImageUrl = "https://www.360mag.bg/wp-content/uploads/2016/12/bg-kurorti-rilski-ezera.jpg",
+                            Name = "Rila Lakes",
+                            NumberOfSlopes = 2,
+                            SkiAreaSizes = 3.0
                         });
-                });
-
-            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.UserResort", b =>
-                {
-                    b.Property<string>("ResortId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("ResortId", "AppUserId");
-
-                    b.HasIndex("AppUserId");
-
-                    b.ToTable("UserResorts");
                 });
 
             modelBuilder.Entity("AppUserResort", b =>
@@ -548,6 +690,25 @@ namespace WinterIsComing.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Like", b =>
+                {
+                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.AppUser", "AppUser")
+                        .WithMany("Likes")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.Resort", "Resort")
+                        .WithMany("Likes")
+                        .HasForeignKey("ResortId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Resort");
+                });
+
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Price", b =>
                 {
                     b.HasOne("WinterIsComing.Infrastructure.Data.Models.Resort", "Resort")
@@ -570,23 +731,9 @@ namespace WinterIsComing.Infrastructure.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.UserResort", b =>
+            modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.AppUser", b =>
                 {
-                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("AppUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WinterIsComing.Infrastructure.Data.Models.Resort", "Resort")
-                        .WithMany()
-                        .HasForeignKey("ResortId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Resort");
-
-                    b.Navigation("User");
+                    b.Navigation("Likes");
                 });
 
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Country", b =>
@@ -597,6 +744,8 @@ namespace WinterIsComing.Infrastructure.Migrations
             modelBuilder.Entity("WinterIsComing.Infrastructure.Data.Models.Resort", b =>
                 {
                     b.Navigation("LiftPassPrices");
+
+                    b.Navigation("Likes");
                 });
 #pragma warning restore 612, 618
         }

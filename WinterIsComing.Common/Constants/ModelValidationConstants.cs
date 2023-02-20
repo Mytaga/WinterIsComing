@@ -48,5 +48,15 @@
             public const string UsernameMinLengthErrorMsg = "Username length must be no more than 50 characters!";
             public const string UsernameMaxLengthErrorMsg = "Username length must be at least 1 character!";
         } 
+
+        public static class CommentValidation
+        {
+            public const int ContentMaxLength = 300;
+            public const int ContentMinLength = 10;
+
+            public const string ContentIsRequiredErrorMsg = "Content is required!";
+            public const string ContentMinLengthErrorMsg = "Content must be at least 10 characters!";
+            public const string ContentMaxLengthErrorMsg = "Content must be no more than 300 characters!";
+        }
     }
 }

@@ -12,6 +12,7 @@ namespace WinterIsComing.Infrastructure.Data.Models
             this.Users = new HashSet<AppUser>();
             this.LiftPassPrices = new HashSet<Price>();
             this.Likes = new HashSet<Like>();
+            this.Comments = new HashSet<Comment>();
         }
 
         [Key]
@@ -47,6 +48,8 @@ namespace WinterIsComing.Infrastructure.Data.Models
 
         public virtual ICollection<Price> LiftPassPrices { get; set; }
 
-        public virtual ICollection<Like> Likes { get; set; }    
+        public virtual ICollection<Like> Likes { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
     }
 }

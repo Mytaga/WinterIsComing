@@ -14,6 +14,8 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddScoped<IResortService, ResortService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ILikeService, LikeService>();
+            services.AddScoped<ICommentService, CommentService>();
 
             return services;
         }

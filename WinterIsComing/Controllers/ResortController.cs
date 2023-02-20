@@ -45,52 +45,5 @@ namespace WinterIsComing.Controllers
 
             return Ok(result);
         }
-
-        [Authorize]
-        [HttpPost("Like/{id}")]
-        public async Task<IActionResult> LikeResort(string id)
-        {
-            var resort = await this.resortService.GetByIdAsync(id);
-
-            if (resort == null)
-            {
-                return NotFound();
-            }
-
-            var userId = this.User.Id();
-
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            await this.resortService.LikeResort(resort, userId);
-
-            return NoContent();
-        }
-
-
-        [Authorize]
-        [HttpPost("Unlike/{id}")]
-        public async Task<IActionResult> UnlikeResort(string id)
-        {
-            var resort = await this.resortService.GetByIdAsync(id);
-
-            if (resort == null)
-            {
-                return NotFound();
-            }
-
-            var userId = this.User.Id();
-
-            if (userId == null)
-            {
-                return BadRequest();
-            }
-
-            await this.resortService.UnlikeResort(resort, userId);
-
-            return NoContent();
-        }
     }
 }

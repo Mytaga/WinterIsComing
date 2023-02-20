@@ -21,6 +21,7 @@ namespace WinterIsComing.Controllers
         }
 
         [HttpPost("Register")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
             if (!this.ModelState.IsValid)

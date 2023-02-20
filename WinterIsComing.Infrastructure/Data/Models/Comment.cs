@@ -22,6 +22,9 @@ namespace WinterIsComing.Infrastructure.Data.Models
         public string Author { get; set; } = null!;
 
         [Required]
+        public DateTime PublishedOn { get; set; }
+
+        [Required]
         [ForeignKey(nameof(User))]
         public string AppUserId { get; set; } = null!;
 

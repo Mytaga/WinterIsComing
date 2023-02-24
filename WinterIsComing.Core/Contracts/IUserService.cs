@@ -11,5 +11,7 @@ namespace WinterIsComing.Core.Contracts
         string GenerateJSONWebToken(AppUser user);
 
         Task<IdentityResult> Register(RegisterDto model);
+
+        Task<UserProfileDto> GetUserProfile(string userId); 
     }       
 }

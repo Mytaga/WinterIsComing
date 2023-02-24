@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
+using WinterIsComing.Core.Models.Comment;
+using WinterIsComing.Extensions;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
@@ -46,7 +49,7 @@ namespace WinterIsComing.Controllers
 
             if (user == null)
             {
-                return BadRequest(new { message = "Username or password is incorrect!" });
+                return BadRequest(new { message = ExceptionErrors.LoginError });
             }
 
             var tokenString = this.userService.GenerateJSONWebToken(user);
@@ -63,6 +66,26 @@ namespace WinterIsComing.Controllers
             await this.signInManager.SignOutAsync();
 
             return Ok(200);
+        }
+
+        [Authorize]
+        [HttpGet("ViewProfile")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> ViewProfile()
+        {
+            var userId = this.User.Id();
+
+            if (userId == null)
+            {
+                return NotFound();
+            }
+
+            var result = await this.userService.GetUserProfile(userId);
+
+            return Ok(result);
         }
     }
 }

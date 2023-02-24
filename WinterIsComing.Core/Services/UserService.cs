@@ -55,6 +55,22 @@ namespace WinterIsComing.Core.Services
             return new JwtSecurityTokenHandler().WriteToken(token); 
         }
 
+        public async Task<UserProfileDto> GetUserProfile(string userId)
+        {
+            
+            var user = await this.userManager.FindByIdAsync(userId);
+
+            var result = new UserProfileDto
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                ImageUrl = user.ImageUrl,
+                MyResorts = user.FavouriteResorts,
+            };
+
+            return result;
+        }
+
         public async Task<IdentityResult> Register(RegisterDto model)
         {
             var user = new AppUser()

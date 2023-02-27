@@ -1,4 +1,4 @@
-﻿using WinterIsComing.Infrastructure.Data.Models;
+﻿using WinterIsComing.Core.Models.Resort;
 
 namespace WinterIsComing.Core.Models
 {
@@ -12,6 +12,6 @@ namespace WinterIsComing.Core.Models
 
         public string ImageUrl { get; set; } = null!;
 
-        public virtual ICollection<Resort> MyResorts { get; set; } = null!;
+        public virtual ICollection<ResortDto> MyResorts { get; set; } = null!;
     }
 }

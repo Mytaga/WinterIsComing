@@ -1,6 +1,6 @@
-﻿namespace WinterIsComing.Core.Models
+﻿namespace WinterIsComing.Core.Models.Resort
 {
-    public class ResortDto
+    public class ResortDetailsDto
     {
         public string Id { get; set; } = null!;
 
@@ -20,6 +20,6 @@
 
         public string CountryName { get; set; } = null!;
 
-        public ICollection<ResortPriceDto> LiftPrices { get; set; } = new HashSet<ResortPriceDto>();    
+        public ICollection<ResortPriceDto> LiftPrices { get; set; } = new HashSet<ResortPriceDto>();
     }
 }

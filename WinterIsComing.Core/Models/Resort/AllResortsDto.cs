@@ -1,4 +1,4 @@
-﻿namespace WinterIsComing.Core.Models
+﻿namespace WinterIsComing.Core.Models.Resort
 {
     public class AllResortsDto
     {

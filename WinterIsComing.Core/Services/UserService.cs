@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WinterIsComing.Core.Models;
+using WinterIsComing.Core.Models.Resort;
 
 namespace WinterIsComing.Core.Services
 {
@@ -66,7 +67,16 @@ namespace WinterIsComing.Core.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ImageUrl = user.ImageUrl,
-                MyResorts = user.FavouriteResorts,
+                MyResorts = user.FavouriteResorts.Select(r => new ResortDto 
+                {
+                    Id = r.Id,
+                    Name = r.Name,
+                    Elevation = r.Elevation,
+                    ImageUrl = r.ImageUrl,
+                    Likes = r.Likes.Count(),
+                    CountryName = r.Country.Name,
+                })
+                .ToList(),
             };
 
             return result;

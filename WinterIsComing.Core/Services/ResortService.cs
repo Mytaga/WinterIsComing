@@ -1,7 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
-using WinterIsComing.Core.Models;
+using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Infrastructure.Data.Common;
 using WinterIsComing.Infrastructure.Data.Models;
 
@@ -40,19 +39,11 @@ namespace WinterIsComing.Core.Services
                     Id = r.Id,
                     Name = r.Name,
                     Elevation = r.Elevation,
-                    Description = r.Description,
                     Likes = r.Likes.Count(),
                     ImageUrl = r.ImageUrl,
-                    NumberOfSlopes = r.NumberOfSlopes,
-                    SkiAreaSizes = r.SkiAreaSizes,
                     CountryName = r.Country.Name,
                 })
                 .ToListAsync();
-
-            foreach (var resort in result.Resorts)
-            {
-                resort.LiftPrices = await this.LoadResortPrices(resort.Id);
-            }
 
             return result;
         }
@@ -92,19 +83,52 @@ namespace WinterIsComing.Core.Services
                    Id = r.Id,
                    Name = r.Name,
                    Elevation = r.Elevation,
-                   Description = r.Description,
                    ImageUrl = r.ImageUrl,
                    Likes = r.Likes.Count(),
-                   NumberOfSlopes = r.NumberOfSlopes,
-                   SkiAreaSizes = r.SkiAreaSizes,
                    CountryName = r.Country.Name,
                })
                .ToListAsync();
 
-            foreach (var resort in result.Resorts)
+            return result;
+        }
+
+        public async Task<ResortDetailsDto> GetResortDetailsAsync(Resort resort)
+        {
+            var result = new ResortDetailsDto
             {
-                resort.LiftPrices = await this.LoadResortPrices(resort.Id);
-            }
+                Id = resort.Id,
+                Name = resort.Name,
+                Elevation = resort.Elevation,
+                Description = resort.Description,
+                ImageUrl = resort.ImageUrl,
+                Likes = resort.Likes.Count(),
+                NumberOfSlopes = resort.NumberOfSlopes,
+                SkiAreaSizes = resort.SkiAreaSizes,
+                CountryName = resort.Country.Name,
+            };
+
+            result.LiftPrices = await this.LoadResortPrices(resort.Id);
+
+            return result;
+        }
+
+        public async Task<AllResortsDto> TopLiked()
+        {
+            var result = new AllResortsDto();
+
+            var resorts = this.repo.AllReadonly<Resort>().OrderByDescending(r => r.Likes).Take(10);
+
+            result.Resorts = await resorts
+               .Select(r => new ResortDto
+               {
+                   Id = r.Id,
+                   Name = r.Name,
+                   Elevation = r.Elevation,
+                   ImageUrl = r.ImageUrl,
+                   Likes = r.Likes.Count(),
+                   CountryName = r.Country.Name,
+               })
+               .ToListAsync();
 
             return result;
         }

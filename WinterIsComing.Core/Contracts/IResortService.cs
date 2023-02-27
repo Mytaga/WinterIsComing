@@ -1,5 +1,4 @@
-﻿using System.Net.Http.Headers;
-using WinterIsComing.Core.Models;
+﻿using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Core.Contracts
@@ -14,5 +13,8 @@ namespace WinterIsComing.Core.Contracts
 
         Task<AllResortsDto> GetLikedAsync(string userId);
 
+        Task<ResortDetailsDto> GetResortDetailsAsync(Resort resort);
+
+        Task<AllResortsDto> TopLiked();
     }
 }

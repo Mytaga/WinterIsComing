@@ -20,6 +20,7 @@ namespace WinterIsComing.Controllers
             this.resortService = resortService;
         }
 
+        [Authorize]
         [HttpGet("GetResortComments/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CommentDto>))]

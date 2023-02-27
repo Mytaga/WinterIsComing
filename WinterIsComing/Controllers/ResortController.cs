@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
-using WinterIsComing.Core.Models;
+using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
@@ -43,6 +43,26 @@ namespace WinterIsComing.Controllers
 
             var result = await this.resortService.GetLikedAsync(userId);
 
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("Details/{id}")]
+        public async Task<IActionResult> Details(string id)
+        {
+            var resort = await this.resortService.GetByIdAsync(id);
+            var result = await this.resortService.GetResortDetailsAsync(resort);
+            return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("TopLiked")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> TopLiked()
+        {
+            var result = await this.resortService.TopLiked();
             return Ok(result);
         }
     }

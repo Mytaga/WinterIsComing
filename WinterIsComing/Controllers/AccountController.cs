@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
-using WinterIsComing.Core.Models.Comment;
 using WinterIsComing.Extensions;
 using WinterIsComing.Infrastructure.Data.Models;
 
@@ -86,6 +85,24 @@ namespace WinterIsComing.Controllers
             var result = await this.userService.GetUserProfile(userId);
 
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpPut("UpdateProfile")]
+        [ProducesResponseType(400, StatusCode =StatusCodes.Status400BadRequest, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]
+        public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model)
+        {
+            var userId = this.User.Id();
+
+            if (userId == null)
+            {
+                return BadRequest();
+            }
+
+            await this.userService.UpdateProfile(model, userId);
+
+            return NoContent();
         }
     }
 }

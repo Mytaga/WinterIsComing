@@ -13,5 +13,7 @@ namespace WinterIsComing.Core.Contracts
         Task<IdentityResult> Register(RegisterDto model);
 
         Task<UserProfileDto> GetUserProfile(string userId); 
+
+        Task UpdateProfile(UpdateUserProfileDto model, string userId);
     }       
 }

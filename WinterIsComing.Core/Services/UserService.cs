@@ -62,6 +62,7 @@ namespace WinterIsComing.Core.Services
 
             var result = new UserProfileDto
             {
+                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ImageUrl = user.ImageUrl,
@@ -85,6 +86,18 @@ namespace WinterIsComing.Core.Services
             var result = await this.userManager.CreateAsync(user, model.Password);
 
             return result;
+        }
+
+        public async Task UpdateProfile(UpdateUserProfileDto model, string userId)
+        {
+            var user = await this.userManager.FindByIdAsync(userId);
+
+            user.UserName = model.UserName;
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.ImageUrl = model.ImageUrl;
+
+            await this.userManager.UpdateAsync(user);
         }
     }
 }

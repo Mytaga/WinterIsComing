@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
+using WinterIsComing.Core.Models.Country;
 using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Extensions;
 
@@ -63,6 +64,17 @@ namespace WinterIsComing.Controllers
         public async Task<IActionResult> TopLiked()
         {
             var result = await this.resortService.TopLiked();
+            return Ok(result);
+        }
+
+        [HttpGet("LoadCountries")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CountryDto>))]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetCountries()
+        {
+            var result = await this.resortService.LoadCountriesAsync();
+
             return Ok(result);
         }
     }

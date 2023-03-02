@@ -1,4 +1,5 @@
-﻿using WinterIsComing.Core.Models.Resort;
+﻿using WinterIsComing.Core.Models.Country;
+using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Core.Contracts
@@ -16,5 +17,7 @@ namespace WinterIsComing.Core.Contracts
         Task<ResortDetailsDto> GetResortDetailsAsync(Resort resort);
 
         Task<AllResortsDto> TopLiked();
+
+        Task<ICollection<CountryDto>> LoadCountriesAsync();
     }
 }

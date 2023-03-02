@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
+using WinterIsComing.Core.Models.Country;
 using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Infrastructure.Data.Common;
 using WinterIsComing.Infrastructure.Data.Models;
@@ -116,7 +117,9 @@ namespace WinterIsComing.Core.Services
         {
             var result = new AllResortsDto();
 
-            var resorts = this.repo.AllReadonly<Resort>().OrderByDescending(r => r.Likes).Take(10);
+            var resorts = this.repo.AllReadonly<Resort>()
+                .OrderByDescending(r => r.Likes)
+                .Take(10);
 
             result.Resorts = await resorts
                .Select(r => new ResortDto
@@ -131,6 +134,18 @@ namespace WinterIsComing.Core.Services
                .ToListAsync();
 
             return result;
+        }
+
+        public async Task<ICollection<CountryDto>> LoadCountriesAsync()
+        {
+            return await this.repo.
+                AllReadonly<Country>()
+                .Select(c => new CountryDto
+                {
+                    Id = c.Id,  
+                    Name = c.Name,
+                })
+                .ToListAsync();
         }
     }
 }

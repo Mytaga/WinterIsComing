@@ -29,7 +29,7 @@ namespace WinterIsComing.Core.Services
 
             if (string.IsNullOrEmpty(searchQuery) == false)
             {
-                searchQuery = $"%{searchQuery.ToLower()}%";
+                searchQuery = $"{searchQuery.ToLower()}%";
 
                 resorts = resorts.Where(r => EF.Functions.Like(r.Name, searchQuery));
             }

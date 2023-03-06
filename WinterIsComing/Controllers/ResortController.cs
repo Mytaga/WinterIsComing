@@ -22,7 +22,7 @@ namespace WinterIsComing.Controllers
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetAll([FromQuery] string? country, string? searchQuery = null)
+        public async Task<IActionResult> GetAll([FromQuery] string? country, string? searchQuery)
         {
             var result = await this.resortService.GetAllAsync(country, searchQuery);
             return Ok(result);

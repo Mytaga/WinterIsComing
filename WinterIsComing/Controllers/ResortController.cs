@@ -47,7 +47,6 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("Details/{id}")]
         public async Task<IActionResult> Details(string id)
         {

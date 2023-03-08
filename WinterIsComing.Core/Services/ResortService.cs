@@ -104,7 +104,7 @@ namespace WinterIsComing.Core.Services
                 ImageUrl = resort.ImageUrl,
                 Likes = resort.Likes.Count(),
                 NumberOfSlopes = resort.NumberOfSlopes,
-                SkiAreaSizes = resort.SkiAreaSizes,
+                SkiAreaSize = resort.SkiAreaSize,
                 CountryName = resort.Country.Name,
             };
 

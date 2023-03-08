@@ -16,7 +16,7 @@
 
         public int NumberOfSlopes { get; set; }
 
-        public double SkiAreaSizes { get; set; }
+        public double SkiAreaSize { get; set; }
 
         public string CountryName { get; set; } = null!;
 

@@ -1,22 +1,38 @@
-﻿namespace WinterIsComing.Common.Constants
+﻿using System.Data;
+
+namespace WinterIsComing.Common.Constants
 {
     public static class ModelValidationConstants
     {
         public static class ResortValidation
         {
             public const int NameMaxLength = 50;
+            public const int NameMinLength = 2;
             public const int ElevationMaxLength = 4;
+            public const int ElevationMinLength = 2;
             public const int DescriptionMaxLength = 150;
+            public const int DescriptionMinLength = 20;
             public const int ImageUrlMaxLength = 100;
+            public const int ImageUrlMinLength = 10;
+            public const int NumberOfSlopesMinLength = 1;
+            public const int NumberOfSlopesMaxLength = 1000;
 
             public const string NameIsRequiredErrorMsg = "Name is required!";
             public const string NameMaxLengthErrorMsg = "Name length must be no more than 50 characters!";
+            public const string NameMinLengthErrorMsg = "Name length must at least 2 characters!";
             public const string ElevationIsRequiredErrorMsg = "Elevation is required!";
             public const string ElevationMaxLengthErrorMsg = "Elevation length must be no more than 4 characters!";
+            public const string ElevationMinLengthErrorMsg = "Elevation length must be at least 2 characters!";
             public const string DescriptionIsRequiredErrorMsg = "Description is required!";
             public const string DescriptionMaxLengthErrorMsg = "Description length must be no more than 150 characters!";
+            public const string DescriptionMinLengthErrorMsg = "Description length must be at least 20 characters!";
             public const string ImageUrlIsRequiredErrorMsg = "ImageUrl is required!";
             public const string ImageUrlMaxLengthErrorMsg = "ImageUrl length must be no more than 100 characters!";
+            public const string ImageUrlMinLengthErrorMsg = "ImageUrl length must be at least 10 characters!";
+            public const string NumberOfSlopesIsRequiredErrorMsg = "Number of slopes is required!";
+            public const string NumberOfSlopesMinLengthErrorMsg = "Number of slopes must be at least 1!";
+            public const string SkiAreSizeIsRequiredErrorMsg = "Ski area size is required!";
+            public const string CountryIsRequiredErrorMsg = "Country is required!";
         }
         
         public static class CountryValidation

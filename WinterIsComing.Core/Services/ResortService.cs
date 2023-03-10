@@ -147,5 +147,23 @@ namespace WinterIsComing.Core.Services
                 })
                 .ToListAsync();
         }
+
+        public async Task AddResortAsync(AddResortDto resort)
+        {
+            var Resort = new Resort()
+            {
+                Name = resort.Name,
+                Elevation = resort.Elevation,
+                ImageUrl = resort.ImageUrl,
+                Description = resort.Description,
+                NumberOfSlopes = resort.NumberOfSlopes,
+                SkiAreaSize = resort.SkiAreaSize,
+                CountryId = resort.CountryId,
+            };
+            
+            await this.repo.AddAsync(Resort);
+
+            await this.repo.SaveChangesAsync();
+        }
     }
 }

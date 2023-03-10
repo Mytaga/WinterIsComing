@@ -19,5 +19,7 @@ namespace WinterIsComing.Core.Contracts
         Task<AllResortsDto> TopLiked();
 
         Task<ICollection<CountryDto>> LoadCountriesAsync();
+
+        Task AddResortAsync(AddResortDto resort);
     }
 }

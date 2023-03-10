@@ -42,6 +42,7 @@ namespace WinterIsComing.Controllers
 
         [Authorize]
         [HttpPost("AddComment/{id}")]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

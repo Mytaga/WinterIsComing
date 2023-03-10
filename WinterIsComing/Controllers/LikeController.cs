@@ -69,8 +69,6 @@ namespace WinterIsComing.Controllers
             await this.likeService.UnlikeResort(resort, userId);
 
             return NoContent();
-        }
-
-       
+        }      
     }
 }

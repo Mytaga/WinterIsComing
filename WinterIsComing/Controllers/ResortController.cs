@@ -18,7 +18,7 @@ namespace WinterIsComing.Controllers
             this.resortService = resortService;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("getAll")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -29,7 +29,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetLiked")]
+        [HttpGet("getLiked")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -47,7 +47,7 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [HttpGet("Details/{id}")]
+        [HttpGet("details/{id}")]
         public async Task<IActionResult> Details(string id)
         {
             var resort = await this.resortService.GetByIdAsync(id);
@@ -56,7 +56,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpGet("TopLiked")]
+        [HttpGet("topLiked")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -66,7 +66,7 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [HttpGet("LoadCountries")]
+        [HttpGet("loadCountries")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CountryDto>))]
         [ProducesResponseType(500)]
@@ -75,6 +75,18 @@ namespace WinterIsComing.Controllers
             var result = await this.resortService.LoadCountriesAsync();
 
             return Ok(result);
+        }
+
+        [HttpPost("add")]
+        [Produces("application/json")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> AddResort([FromBody] AddResortDto model)
+        {
+            await this.resortService.AddResortAsync(model);
+
+            return NoContent();
         }
     }
 }

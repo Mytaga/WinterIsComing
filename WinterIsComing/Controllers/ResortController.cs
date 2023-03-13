@@ -4,6 +4,7 @@ using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Country;
 using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Extensions;
+using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
@@ -79,14 +80,14 @@ namespace WinterIsComing.Controllers
 
         [HttpPost("add")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddResortDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddResort([FromBody] AddResortDto model)
         {
             await this.resortService.AddResortAsync(model);
 
-            return NoContent();
+            return Ok(model);
         }
     }
 }

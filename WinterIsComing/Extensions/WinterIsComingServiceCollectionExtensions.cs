@@ -40,6 +40,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 {
                     opt.AllowAnyOrigin();
                     opt.AllowAnyMethod();
+                    opt.AllowAnyHeader();
                 });
             });
         }

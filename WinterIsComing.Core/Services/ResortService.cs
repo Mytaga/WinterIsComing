@@ -165,5 +165,17 @@ namespace WinterIsComing.Core.Services
 
             await this.repo.SaveChangesAsync();
         }
+
+        public async Task<ICollection<ResortNameDto>> LoadResortsNamesAsync()
+        {
+            return await this.repo.
+                 AllReadonly<Resort>()
+                 .Select(c => new ResortNameDto
+                 {
+                     Id = c.Id,
+                     Name = c.Name,
+                 })
+                 .ToListAsync();
+        }
     }
 }

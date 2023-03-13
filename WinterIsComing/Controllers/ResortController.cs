@@ -89,5 +89,16 @@ namespace WinterIsComing.Controllers
 
             return Ok(model);
         }
+
+        [HttpGet("getResortNames")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortNameDto))]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> GetResortNames()
+        {
+            var result = await this.resortService.LoadResortsNamesAsync();
+            return Ok(result);
+        }
+
     }
 }

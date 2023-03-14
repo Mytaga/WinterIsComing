@@ -63,6 +63,7 @@ namespace WinterIsComing.Core.Services
                 .Where(p => p.ResortId == id)
                 .Select(p => new ResortPriceDto
                 {
+                    Id = p.Id,
                     PassType = p.PassType.ToString(),
                     Price = p.Value,
                 })

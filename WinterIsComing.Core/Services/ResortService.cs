@@ -44,6 +44,7 @@ namespace WinterIsComing.Core.Services
                     ImageUrl = r.ImageUrl,
                     CountryName = r.Country.Name,
                 })
+                .OrderBy(r => r.Name)
                 .ToListAsync();
 
             return result;

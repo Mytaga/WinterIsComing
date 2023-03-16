@@ -21,7 +21,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpGet("GetResortComments/{id}")]
+        [HttpGet("getResortComments/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CommentDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -41,7 +41,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpPost("AddComment/{id}")]
+        [HttpPost("add/{resortId}")]
         [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -74,7 +74,7 @@ namespace WinterIsComing.Controllers
 
 
         [Authorize]
-        [HttpDelete("DeleteComment/{id}")]
+        [HttpDelete("delete/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

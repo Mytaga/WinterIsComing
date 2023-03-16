@@ -22,7 +22,7 @@ namespace WinterIsComing.Controllers
             this.signInManager = signInManager;
         }
 
-        [HttpPost("Register")]
+        [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
@@ -41,7 +41,7 @@ namespace WinterIsComing.Controllers
             return this.StatusCode(201);
         }
 
-        [HttpPost("Login")]
+        [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto model)
         {
             var user = await this.userService.Authenticate(model.Email, model.Password);
@@ -59,7 +59,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpPost("Logout")]
+        [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
@@ -68,7 +68,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpGet("ViewProfile")]
+        [HttpGet("viewProfile")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -88,7 +88,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpPut("UpdateProfile")]
+        [HttpPut("updateProfile")]
         [ProducesResponseType(400, StatusCode =StatusCodes.Status400BadRequest, Type = typeof(UserProfileDto))]
         [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model)

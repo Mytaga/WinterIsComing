@@ -48,18 +48,20 @@ namespace WinterIsComing.Core.Services
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
-        public async Task<ICollection<CommentDto>> GetResortComments(Resort resort)
+        public async Task<AllCommentsDto> GetResortComments(Resort resort)
         {
-            var result = await this.repo
-                .AllReadonly<Comment>()
-                .Where(c => c.ResortId == resort.Id)
-                .Select(c => new CommentDto
-                {
-                    Id = c.Id,
-                    Author = c.Author,
-                    Content = c.Content,
-                    PublishedOn = c.PublishedOn,
+            var result = new AllCommentsDto();
 
+            var comments = this.repo.AllReadonly<Comment>();
+
+            result.Comments = await comments
+                .Select(r => new CommentDto
+                {
+                    Id = r.Id,
+                    Author = r.Author,
+                    PublishedOn = r.PublishedOn.ToShortDateString(),
+                    AuthorImageUrl = r.User.ImageUrl,
+                    Content = r.Content
                 })
                 .ToListAsync();
 

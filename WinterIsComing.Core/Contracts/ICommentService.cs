@@ -5,7 +5,7 @@ namespace WinterIsComing.Core.Contracts
 {
     public interface ICommentService
     {
-        Task<ICollection<CommentDto>> GetResortComments(Resort resort);
+        Task<AllCommentsDto> GetResortComments(Resort resort);
 
         Task AddComment(AddCommentDto model, Resort resort, string userId);
 

@@ -15,5 +15,6 @@ namespace WinterIsComing.Core.Models.Comment
 
         [Required]
         public DateTime PublishedOn => DateTime.UtcNow;
+
     }
 }

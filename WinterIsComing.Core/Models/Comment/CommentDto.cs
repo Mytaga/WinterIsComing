@@ -8,8 +8,9 @@
 
         public string Content { get; set; } = null!;
 
-        public DateTime PublishedOn { get; set; }
+        public string PublishedOn { get; set; } = null!;
 
-        public string ResortId { get; set; } = null!;
+        public string AuthorImageUrl { get; set; } = null!;
+
     }
 }

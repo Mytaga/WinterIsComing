@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
+using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
@@ -20,11 +21,10 @@ namespace WinterIsComing.Controllers
             this.resortService = resortService;
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("getResortComments/{id}")]
         [Produces("application/json")]
-        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CommentDto>))]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllCommentsDto))]
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetResortComments(string id)
         {
@@ -40,10 +40,10 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpPost("add/{resortId}")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddComment(string id, [FromBody]AddCommentDto model)
@@ -69,7 +69,7 @@ namespace WinterIsComing.Controllers
 
             await this.commentService.AddComment(model, resort, userId);
 
-            return NoContent();
+            return Ok(model);
         }
 
 

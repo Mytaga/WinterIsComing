@@ -12,5 +12,7 @@
 
         public string AuthorImageUrl { get; set; } = null!;
 
+        public string ResortId { get; set; } = null!;
+
     }
 }

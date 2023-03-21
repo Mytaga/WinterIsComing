@@ -52,7 +52,7 @@ namespace WinterIsComing.Core.Services
         {
             var result = new AllCommentsDto();
 
-            var comments = this.repo.AllReadonly<Comment>();
+            var comments = this.repo.AllReadonly<Comment>().Where(c => c.ResortId == resort.Id);
 
             result.Comments = await comments
                 .Select(r => new CommentDto
@@ -61,7 +61,8 @@ namespace WinterIsComing.Core.Services
                     Author = r.Author,
                     PublishedOn = r.PublishedOn.ToShortDateString(),
                     AuthorImageUrl = r.User.ImageUrl,
-                    Content = r.Content
+                    Content = r.Content,
+                    ResortId = resort.Id,
                 })
                 .ToListAsync();
 

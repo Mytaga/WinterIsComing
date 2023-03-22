@@ -55,7 +55,7 @@ namespace WinterIsComing.Controllers
 
             await this.signInManager.SignInAsync(user, true);
 
-            return Ok( new { token = tokenString });    
+            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl });    
         }
 
         [Authorize]

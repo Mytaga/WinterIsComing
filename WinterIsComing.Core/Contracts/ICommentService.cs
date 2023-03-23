@@ -7,7 +7,7 @@ namespace WinterIsComing.Core.Contracts
     {
         Task<AllCommentsDto> GetResortComments(Resort resort);
 
-        Task AddComment(AddCommentDto model, Resort resort, string userId);
+        Task AddComment(AddCommentDto model, Resort resort);
 
         Task DeleteComment(Comment comment);
 

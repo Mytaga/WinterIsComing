@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
-using WinterIsComing.Core.Models.Resort;
 using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
@@ -39,13 +38,12 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpPost("add/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddComment(string id, AddCommentDto model)
+        public async Task<IActionResult> AddComment(string id, [FromBody]AddCommentDto model)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
@@ -54,19 +52,13 @@ namespace WinterIsComing.Controllers
                 return NotFound();
             }
 
-            var userId = this.User.Id();
-
-            if (userId == null)
-            {
-                return Unauthorized();
-            }
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ExceptionErrors.InvalidModel);
             }
 
-            await this.commentService.AddComment(model, resort, userId);
+            await this.commentService.AddComment(model, resort);
 
             return Ok(model);
         }

@@ -18,17 +18,15 @@ namespace WinterIsComing.Core.Services
             this.userManager= userManager;
         }
 
-        public async Task AddComment(AddCommentDto model, Resort resort, string userId)
-        {
-            var user = await userManager.FindByIdAsync(userId);
-            
+        public async Task AddComment(AddCommentDto model, Resort resort)
+        {   
             var comment = new Comment
             {
                 Content = model.Content,
-                Author = user.UserName,
+                Author = model.Author,
                 PublishedOn = model.PublishedOn,
                 ResortId = resort.Id,
-                AppUserId = userId,
+                AppUserId = model.AppUserId,
             };
 
             await this.repo.AddAsync(comment);

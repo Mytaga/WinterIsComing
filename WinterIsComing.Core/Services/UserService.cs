@@ -47,7 +47,7 @@ namespace WinterIsComing.Core.Services
             var token = new JwtSecurityToken(
                 issuer: this.configuration["JWT:ValidIssuer"],
                 audience: this.configuration["JWT:ValidAudience"],
-                expires: DateTime.Now.AddHours(3),
+                expires: DateTime.Now.AddHours(1),
                 claims: authClaims,
                 signingCredentials:
                 new SigningCredentials(autoSignInkey, SecurityAlgorithms.HmacSha256));

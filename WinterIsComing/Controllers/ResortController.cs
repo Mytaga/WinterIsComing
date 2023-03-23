@@ -49,6 +49,9 @@ namespace WinterIsComing.Controllers
         }
 
         [HttpGet("details/{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortDetailsDto))]
+        [ProducesResponseType(500)]
         public async Task<IActionResult> Details(string id)
         {
             var resort = await this.resortService.GetByIdAsync(id);

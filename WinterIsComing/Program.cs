@@ -16,6 +16,7 @@ namespace WinterIsComing
             {
                 opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             })
                 .AddJwtBearer(options =>
                 {
@@ -32,7 +33,7 @@ namespace WinterIsComing
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
                     };
                 });
-
+            
             builder.Services.AddControllers()
                 .AddNewtonsoftJson();
     

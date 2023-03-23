@@ -21,7 +21,6 @@ namespace WinterIsComing.Controllers
             this.resortService = resortService;
         }
 
-        //[Authorize]
         [HttpGet("getResortComments/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllCommentsDto))]
@@ -40,13 +39,13 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        //[Authorize]
-        [HttpPost("add/{resortId}")]
+        [Authorize]
+        [HttpPost("add/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddComment(string id, [FromBody]AddCommentDto model)
+        public async Task<IActionResult> AddComment(string id, AddCommentDto model)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
@@ -59,7 +58,7 @@ namespace WinterIsComing.Controllers
 
             if (userId == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             if (!ModelState.IsValid)
@@ -83,14 +82,14 @@ namespace WinterIsComing.Controllers
             var comment = await this.commentService.GetById(id);
             var userId = this.User.Id();
 
-            if (comment == null)
-            {
-                return NotFound();
-            }
-
             if (userId == null || comment.AppUserId != userId)
             {
                 return Unauthorized();
+            }
+
+            if (comment == null)
+            {
+                return NotFound();
             }
 
             await this.commentService.DeleteComment(comment);

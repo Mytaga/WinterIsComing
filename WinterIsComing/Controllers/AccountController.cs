@@ -23,6 +23,7 @@ namespace WinterIsComing.Controllers
         }
 
         [HttpPost("register")]
+        [Produces("application/json")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
@@ -42,7 +43,9 @@ namespace WinterIsComing.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto model)
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(LoginDto))]
+        public async Task<IActionResult> Login(LoginDto model)
         {
             var user = await this.userService.Authenticate(model.Email, model.Password);
 
@@ -59,21 +62,22 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
+        [Produces("application/json")]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
             await this.signInManager.SignOutAsync();
 
-            return Ok(200);
+            return Ok();
         }
 
         [Authorize]
-        [HttpGet("viewProfile")]
+        [HttpGet("viewProfile/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> ViewProfile()
+        public async Task<IActionResult> ViewProfile(string id)
         {
             var userId = this.User.Id();
 
@@ -82,16 +86,16 @@ namespace WinterIsComing.Controllers
                 return NotFound();
             }
 
-            var result = await this.userService.GetUserProfile(userId);
+            var result = await this.userService.GetUserProfile(id);
 
             return Ok(result);
         }
 
         [Authorize]
-        [HttpPut("updateProfile")]
+        [HttpPut("updateProfile/{id}")]
         [ProducesResponseType(400, StatusCode =StatusCodes.Status400BadRequest, Type = typeof(UserProfileDto))]
         [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]
-        public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model)
+        public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
         {
             var userId = this.User.Id();
 
@@ -100,7 +104,7 @@ namespace WinterIsComing.Controllers
                 return BadRequest();
             }
 
-            await this.userService.UpdateProfile(model, userId);
+            await this.userService.UpdateProfile(model, id);
 
             return NoContent();
         }

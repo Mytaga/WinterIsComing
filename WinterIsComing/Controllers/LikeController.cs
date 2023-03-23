@@ -19,7 +19,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize]
-        [HttpPost("like/{resortId}")]
+        [HttpPost("like/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -46,7 +46,7 @@ namespace WinterIsComing.Controllers
 
 
         [Authorize]
-        [HttpPost("unlike/{resortId}")]
+        [HttpPost("unlike/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

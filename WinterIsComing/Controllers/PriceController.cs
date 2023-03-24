@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Price;
-using WinterIsComing.Core.Models.Resort;
 
 namespace WinterIsComing.Controllers
 {
@@ -16,6 +17,7 @@ namespace WinterIsComing.Controllers
             this.priceService = priceService;
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("add")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddPriceDto))]

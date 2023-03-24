@@ -12,6 +12,8 @@ namespace WinterIsComing.Core.Models
 
         public string ImageUrl { get; set; } = null!;
 
+        public string Email { get; set; } = null!;
+
         public virtual ICollection<ResortDto> MyResorts { get; set; } = null!;
     }
 }

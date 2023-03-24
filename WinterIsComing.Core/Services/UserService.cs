@@ -67,6 +67,7 @@ namespace WinterIsComing.Core.Services
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 ImageUrl = user.ImageUrl,
+                Email = user.Email,
                 MyResorts = user.FavouriteResorts.Select(r => new ResortDto 
                 {
                     Id = r.Id,

@@ -41,7 +41,7 @@ namespace WinterIsComing
             builder.Services.AddSwaggerGen();
 
             builder.Services.AddApplicationServices();
-
+             
             builder.Services.AddDbContext(builder.Configuration);
 
             builder.Services.AddIdentity();

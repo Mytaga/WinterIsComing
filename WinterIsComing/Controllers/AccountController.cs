@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
@@ -61,7 +62,7 @@ namespace WinterIsComing.Controllers
             return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl });    
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [Produces("application/json")]
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
@@ -71,7 +72,7 @@ namespace WinterIsComing.Controllers
             return Ok();
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpGet("viewProfile/{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
@@ -91,7 +92,7 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("updateProfile/{id}")]
         [ProducesResponseType(400, StatusCode =StatusCodes.Status400BadRequest, Type = typeof(UserProfileDto))]
         [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]

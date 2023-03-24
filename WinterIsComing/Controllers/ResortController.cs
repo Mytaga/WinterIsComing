@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Country;
@@ -29,15 +30,13 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
-        [HttpGet("getLiked")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("getLiked/{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetLiked()
+        public async Task<IActionResult> GetLiked(string userId)
         {
-            var userId = this.User.Id();
-
             if (userId == null)
             {
                 return BadRequest();

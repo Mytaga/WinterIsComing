@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Core.Contracts;
+using WinterIsComing.Core.Models.Like;
 using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
@@ -20,11 +21,11 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("like/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpPost("like/{id}/{userId}")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(LikeDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> LikeResort(string id)
+        public async Task<IActionResult> LikeResort(string id, string userId)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
@@ -33,16 +34,14 @@ namespace WinterIsComing.Controllers
                 return NotFound();
             }
 
-            var userId = this.User.Id();
-
             if (userId == null)
             {
                 return BadRequest();
             }
 
-            await this.likeService.LikeResort(resort, userId);
+            var result = await this.likeService.LikeResort(resort, userId);
 
-            return NoContent();
+            return Ok(result);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -69,6 +68,22 @@ namespace WinterIsComing.Controllers
             await this.likeService.UnlikeResort(resort, userId);
 
             return NoContent();
-        }      
+        }
+
+        [HttpGet("getResortLikes/{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<LikeDto>))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetResortLikes(string id)
+        {
+            if (id == null)
+            {
+                return BadRequest();
+            }
+
+            var result = await this.likeService.LoadAllResortLikesAsync(id);
+
+            return Ok(result);
+        }
     }
 }

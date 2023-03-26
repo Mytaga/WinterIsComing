@@ -58,7 +58,6 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
-        [Authorize]
         [HttpGet("topLiked")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]

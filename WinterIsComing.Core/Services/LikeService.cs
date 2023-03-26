@@ -38,6 +38,7 @@ namespace WinterIsComing.Core.Services
 
             var model = new LikeDto
             {
+                Id = like.Id,
                 ResortId = resort.Id,
                 UserId = userId,
             };
@@ -72,6 +73,7 @@ namespace WinterIsComing.Core.Services
                 .Where(l => l.ResortId == resortId)
                 .Select(l => new LikeDto
                 {
+                    Id = l.Id,
                     ResortId = l.ResortId,
                     UserId = l.AppUserId,
                 })

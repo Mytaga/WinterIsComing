@@ -48,14 +48,21 @@ namespace WinterIsComing.Core.Services
             return model;
         }
 
-        public async Task UnlikeResort(Resort resort, string userId)
+        public async Task<LikeDto> UnlikeResort(Resort resort, string userId)
         {
             var user = await this.userManager.FindByIdAsync(userId);
             var likes = await this.repo.All<Like>().Where(l => l.ResortId == resort.Id).ToListAsync();
 
+            var model = new LikeDto();
+
             if (likes.Any(l => l.AppUserId == userId))
             {
                 var like = likes.FirstOrDefault(l => l.AppUserId == userId);
+
+                model.Id = like.Id;
+                model.UserId = like.AppUserId;
+                model.ResortId = like.ResortId;
+
                 resort.Likes.Remove(like);
                 resort.Users.Remove(user);
                 this.repo.Delete<Like>(like);
@@ -64,6 +71,8 @@ namespace WinterIsComing.Core.Services
             this.repo.Update(resort);
 
             await this.repo.SaveChangesAsync();
+
+            return model;
         }
 
         public async Task<ICollection<LikeDto>> LoadAllResortLikesAsync(string resortId)

@@ -7,7 +7,7 @@ namespace WinterIsComing.Core.Contracts
     {
         Task<LikeDto> LikeResort(Resort resort, string userId);
 
-        Task UnlikeResort(Resort resort, string userId);
+        Task<LikeDto> UnlikeResort(Resort resort, string userId);
 
         Task<ICollection<LikeDto>> LoadAllResortLikesAsync(string resortId);
     }

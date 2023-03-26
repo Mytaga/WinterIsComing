@@ -45,11 +45,11 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete("unlike/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [HttpDelete("unlike/{id}/{userId}")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(LikeDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> UnlikeResort(string id)
+        public async Task<IActionResult> UnlikeResort(string id, string userId)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
@@ -58,16 +58,14 @@ namespace WinterIsComing.Controllers
                 return NotFound();
             }
 
-            var userId = this.User.Id();
-
             if (userId == null)
             {
                 return BadRequest();
             }
 
-            await this.likeService.UnlikeResort(resort, userId);
+            var result = await this.likeService.UnlikeResort(resort, userId);
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpGet("getResortLikes/{id}")]

@@ -120,7 +120,7 @@ namespace WinterIsComing.Core.Services
             var result = new AllResortsDto();
 
             var resorts = this.repo.AllReadonly<Resort>()
-                .OrderByDescending(r => r.Likes)
+                .OrderByDescending(r => r.Likes.Count())
                 .Take(10);
 
             result.Resorts = await resorts

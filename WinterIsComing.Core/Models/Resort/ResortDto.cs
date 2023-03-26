@@ -1,4 +1,6 @@
-﻿namespace WinterIsComing.Core.Models.Resort
+﻿using WinterIsComing.Infrastructure.Data.Models;
+
+namespace WinterIsComing.Core.Models.Resort
 {
     public class ResortDto
     {

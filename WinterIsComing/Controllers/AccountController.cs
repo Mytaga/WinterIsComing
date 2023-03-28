@@ -80,9 +80,7 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> ViewProfile(string id)
         {
-            var userId = this.User.Id();
-
-            if (userId == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -98,9 +96,7 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]
         public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
         {
-            var userId = this.User.Id();
-
-            if (userId == null)
+            if (id == null)
             {
                 return BadRequest();
             }

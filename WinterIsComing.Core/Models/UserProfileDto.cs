@@ -10,10 +10,8 @@ namespace WinterIsComing.Core.Models
 
         public string LastName { get; set; } = null!;
 
-        public string ImageUrl { get; set; } = null!;
+        public string? ImageUrl { get; set; }
 
         public string Email { get; set; } = null!;
-
-        public virtual ICollection<ResortDto> MyResorts { get; set; } = null!;
     }
 }

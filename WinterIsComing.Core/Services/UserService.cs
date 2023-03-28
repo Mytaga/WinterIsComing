@@ -58,7 +58,6 @@ namespace WinterIsComing.Core.Services
 
         public async Task<UserProfileDto> GetUserProfile(string userId)
         {
-            
             var user = await this.userManager.FindByIdAsync(userId);
 
             var result = new UserProfileDto
@@ -68,16 +67,6 @@ namespace WinterIsComing.Core.Services
                 LastName = user.LastName,
                 ImageUrl = user.ImageUrl,
                 Email = user.Email,
-                MyResorts = user.FavouriteResorts.Select(r => new ResortDto 
-                {
-                    Id = r.Id,
-                    Name = r.Name,
-                    Elevation = r.Elevation,
-                    ImageUrl = r.ImageUrl,
-                    Likes = r.Likes.Count(),
-                    CountryName = r.Country.Name,
-                })
-                .ToList(),
             };
 
             return result;

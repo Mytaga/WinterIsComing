@@ -150,22 +150,24 @@ namespace WinterIsComing.Core.Services
                 .ToListAsync();
         }
 
-        public async Task AddResortAsync(AddResortDto resort)
+        public async Task<Resort> AddResortAsync(AddResortDto model)
         {
-            var Resort = new Resort()
+            var resort = new Resort()
             {
-                Name = resort.Name,
-                Elevation = resort.Elevation,
-                ImageUrl = resort.ImageUrl,
-                Description = resort.Description,
-                NumberOfSlopes = resort.NumberOfSlopes,
-                SkiAreaSize = resort.SkiAreaSize,
-                CountryId = resort.CountryId,
+                Name = model.Name,
+                Elevation = model.Elevation,
+                ImageUrl = model.ImageUrl,
+                Description = model.Description,
+                NumberOfSlopes = model.NumberOfSlopes,
+                SkiAreaSize = model.SkiAreaSize,
+                CountryId = model.CountryId,
             };
             
-            await this.repo.AddAsync(Resort);
+            await this.repo.AddAsync(resort);
 
             await this.repo.SaveChangesAsync();
+
+            return resort;
         }
 
         public async Task<ICollection<ResortNameDto>> LoadResortsNamesAsync()

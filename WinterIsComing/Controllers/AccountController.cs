@@ -25,7 +25,7 @@ namespace WinterIsComing.Controllers
 
         [HttpPost("register")]
         [Produces("application/json")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
             if (!this.ModelState.IsValid)
@@ -59,7 +59,7 @@ namespace WinterIsComing.Controllers
 
             await this.signInManager.SignInAsync(user, true);
 
-            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl });    
+            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl, firstName = user.FirstName, lastName = user.LastName });    
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -77,7 +77,6 @@ namespace WinterIsComing.Controllers
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(500)]
         public async Task<IActionResult> ViewProfile(string id)
         {
             if (id == null)
@@ -92,18 +91,19 @@ namespace WinterIsComing.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPut("updateProfile/{id}")]
-        [ProducesResponseType(400, StatusCode =StatusCodes.Status400BadRequest, Type = typeof(UserProfileDto))]
-        [ProducesResponseType(204, StatusCode =StatusCodes.Status204NoContent)]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
         {
             if (id == null)
             {
-                return BadRequest();
+                return NotFound();
             }
 
-            await this.userService.UpdateProfile(model, id);
+            var result = await this.userService.UpdateProfile(model, id);
 
-            return NoContent();
+            return Ok(result);
         }
     }
 }

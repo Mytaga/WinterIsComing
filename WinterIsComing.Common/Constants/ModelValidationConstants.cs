@@ -10,9 +10,9 @@ namespace WinterIsComing.Common.Constants
             public const int NameMinLength = 2;
             public const int ElevationMaxLength = 4;
             public const int ElevationMinLength = 2;
-            public const int DescriptionMaxLength = 150;
+            public const int DescriptionMaxLength = 300;
             public const int DescriptionMinLength = 20;
-            public const int ImageUrlMaxLength = 100;
+            public const int ImageUrlMaxLength = 200;
             public const int ImageUrlMinLength = 10;
             public const int NumberOfSlopesMinLength = 1;
             public const int NumberOfSlopesMaxLength = 1000;
@@ -50,7 +50,7 @@ namespace WinterIsComing.Common.Constants
             public const int LastNameMinLength = 2;
             public const int LastNameMaxLength = 30;
             public const int ImageUrlMaxLength = 100;
-            public const int UsernameMinLength = 1;
+            public const int UsernameMinLength = 2;
             public const int UsernameMaxLength = 50;
 
             public const string FirstNameIsRequiredErrorMsg = "First Name is required!";

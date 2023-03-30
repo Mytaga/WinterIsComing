@@ -1,0 +1,12 @@
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\bin\Debug\net6.0\WinterIsComing.Common.deps.json
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\bin\Debug\net6.0\WinterIsComing.Common.dll
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\bin\Debug\net6.0\WinterIsComing.Common.pdb
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.csproj.AssemblyReference.cache
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.AssemblyInfoInputs.cache
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.AssemblyInfo.cs
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.csproj.CoreCompileInputs.cache
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.dll
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\refint\WinterIsComing.Common.dll
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\WinterIsComing.Common.pdb
+C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Common\obj\Debug\net6.0\ref\WinterIsComing.Common.dll

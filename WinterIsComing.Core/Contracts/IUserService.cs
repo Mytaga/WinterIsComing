@@ -14,6 +14,6 @@ namespace WinterIsComing.Core.Contracts
 
         Task<UserProfileDto> GetUserProfile(string userId); 
 
-        Task UpdateProfile(UpdateUserProfileDto model, string userId);
+        Task<UpdateUserProfileDto> UpdateProfile(UpdateUserProfileDto model, string userId);
     }       
 }

@@ -88,7 +88,7 @@ namespace WinterIsComing.Core.Services
             return result;
         }
 
-        public async Task UpdateProfile(UpdateUserProfileDto model, string userId)
+        public async Task<UpdateUserProfileDto> UpdateProfile(UpdateUserProfileDto model, string userId)
         {
             var user = await this.userManager.FindByIdAsync(userId);
 
@@ -98,6 +98,8 @@ namespace WinterIsComing.Core.Services
             user.ImageUrl = model.ImageUrl;
 
             await this.userManager.UpdateAsync(user);
+
+            return model;
         }
     }
 }

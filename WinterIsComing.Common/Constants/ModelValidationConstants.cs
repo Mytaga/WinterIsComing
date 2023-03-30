@@ -24,10 +24,10 @@ namespace WinterIsComing.Common.Constants
             public const string ElevationMaxLengthErrorMsg = "Elevation length must be no more than 4 characters!";
             public const string ElevationMinLengthErrorMsg = "Elevation length must be at least 2 characters!";
             public const string DescriptionIsRequiredErrorMsg = "Description is required!";
-            public const string DescriptionMaxLengthErrorMsg = "Description length must be no more than 150 characters!";
+            public const string DescriptionMaxLengthErrorMsg = "Description length must be no more than 300 characters!";
             public const string DescriptionMinLengthErrorMsg = "Description length must be at least 20 characters!";
             public const string ImageUrlIsRequiredErrorMsg = "ImageUrl is required!";
-            public const string ImageUrlMaxLengthErrorMsg = "ImageUrl length must be no more than 100 characters!";
+            public const string ImageUrlMaxLengthErrorMsg = "ImageUrl length must be no more than 200 characters!";
             public const string ImageUrlMinLengthErrorMsg = "ImageUrl length must be at least 10 characters!";
             public const string NumberOfSlopesIsRequiredErrorMsg = "Number of slopes is required!";
             public const string NumberOfSlopesMinLengthErrorMsg = "Number of slopes must be at least 1!";

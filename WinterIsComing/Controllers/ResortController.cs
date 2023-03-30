@@ -82,14 +82,14 @@ namespace WinterIsComing.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpPost("add")]
         [Produces("application/json")]
-        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddResortDto))]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(Resort))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddResort([FromBody] AddResortDto model)
         {
-            await this.resortService.AddResortAsync(model);
+            var result = await this.resortService.AddResortAsync(model);
 
-            return Ok(model);
+            return Ok(result);
         }
 
         [HttpGet("getResortNames")]

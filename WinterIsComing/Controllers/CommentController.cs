@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
-using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
 {
@@ -66,29 +65,28 @@ namespace WinterIsComing.Controllers
         }
 
 
-        [Authorize]
-        [HttpDelete("delete/{id}")]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("delete/{resortId}/{userId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string resortId, string userId)
         {
-            var comment = await this.commentService.GetById(id);
-            var userId = this.User.Id();
+            var resort = await this.resortService.GetByIdAsync(resortId);
 
-            if (userId == null || comment.AppUserId != userId)
-            {
-                return Unauthorized();
-            }
-
-            if (comment == null)
+            if (resort == null)
             {
                 return NotFound();
             }
 
-            await this.commentService.DeleteComment(comment);
+            if (userId == null)
+            {
+                return BadRequest();
+            }
 
-            return NoContent();
+            var result = await this.commentService.DeleteComment(resort, userId);
+
+            return Ok(result);
         }
     }
 }

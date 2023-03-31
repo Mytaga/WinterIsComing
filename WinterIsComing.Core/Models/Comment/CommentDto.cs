@@ -14,5 +14,7 @@
 
         public string ResortId { get; set; } = null!;
 
+        public string AuthorId { get; set; } = null!;
+
     }
 }

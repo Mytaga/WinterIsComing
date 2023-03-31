@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
+using WinterIsComing.Core.Models.Like;
 using WinterIsComing.Infrastructure.Data.Common;
 using WinterIsComing.Infrastructure.Data.Models;
 
@@ -33,16 +34,35 @@ namespace WinterIsComing.Core.Services
             await this.repo.SaveChangesAsync();
         }
 
-        public async Task DeleteComment(Comment comment)
+        public async Task<CommentDto> DeleteComment(Resort resort, string userId)
         {
-            await this.repo
-                .DeleteAsync<Comment>(comment);
+            var user = await this.userManager.FindByIdAsync(userId);
+            var comments = await this.repo.All<Comment>().Where(c => c.ResortId == resort.Id).ToListAsync();
+
+            var model = new CommentDto();
+
+            if (comments.Any(c => c.AppUserId == userId))
+            {
+                var comment = comments.FirstOrDefault(c => c.AppUserId == userId);
+
+                model.Id = comment.Id;
+                model.AuthorId = comment.AppUserId;
+                model.ResortId = comment.ResortId;
+
+                resort.Comments.Remove(comment);
+                user.Comments.Remove(comment);
+                this.repo.Delete<Comment>(comment);
+            }
+
+            await this.repo.SaveChangesAsync();
+
+            return model;
         }
 
         public async Task<Comment> GetById(string id)
         {
             return await this.repo
-                .AllReadonly<Comment>()
+                .All<Comment>()
                 .FirstOrDefaultAsync(c => c.Id == id);
         }
 
@@ -61,6 +81,7 @@ namespace WinterIsComing.Core.Services
                     AuthorImageUrl = r.User.ImageUrl,
                     Content = r.Content,
                     ResortId = resort.Id,
+                    AuthorId = r.AppUserId,
                 })
                 .ToListAsync();
 

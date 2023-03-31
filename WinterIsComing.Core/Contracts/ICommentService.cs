@@ -9,7 +9,7 @@ namespace WinterIsComing.Core.Contracts
 
         Task AddComment(AddCommentDto model, Resort resort);
 
-        Task DeleteComment(Comment comment);
+        Task<CommentDto> DeleteComment(Resort resort, string userId);
 
         Task<Comment> GetById(string id);
     }

@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
-using WinterIsComing.Core.Models.Like;
 using WinterIsComing.Infrastructure.Data.Common;
 using WinterIsComing.Infrastructure.Data.Models;
 
@@ -57,6 +56,15 @@ namespace WinterIsComing.Core.Services
             await this.repo.SaveChangesAsync();
 
             return model;
+        }
+
+        public async Task EditComment(AddCommentDto model, Comment comment)
+        {
+            comment.Content = model.Content;
+            
+            this.repo.Update<Comment>(comment);
+
+            await this.repo.SaveChangesAsync();
         }
 
         public async Task<Comment> GetById(string id)

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Comment;
+using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
@@ -64,10 +65,44 @@ namespace WinterIsComing.Controllers
             return Ok(model);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpPut("edit/{id}")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(CommentDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<IActionResult> Edit(string id, [FromBody] AddCommentDto model)
+        {
+            var comment = await this.commentService.GetById(id);
+
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
+            await this.commentService.EditComment(model, comment);
+
+            return Ok(model);
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpGet("getComment/{id}")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(Comment))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetComment(string id)
+        {
+            var result = await this.commentService.GetById(id);
+
+            if (result == null)
+            {
+                return BadRequest();
+            }
+
+            return Ok(result);
+        }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
         [HttpDelete("delete/{resortId}/{userId}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(CommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Delete(string resortId, string userId)
@@ -81,7 +116,7 @@ namespace WinterIsComing.Controllers
 
             if (userId == null)
             {
-                return BadRequest();
+                return Unauthorized();
             }
 
             var result = await this.commentService.DeleteComment(resort, userId);

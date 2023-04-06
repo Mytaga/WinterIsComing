@@ -59,7 +59,7 @@ namespace WinterIsComing.Controllers
 
             await this.signInManager.SignInAsync(user, true);
 
-            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl, firstName = user.FirstName, lastName = user.LastName });    
+            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl, firstName = user.FirstName, lastName = user.LastName, email = user.Email });    
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

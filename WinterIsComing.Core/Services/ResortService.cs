@@ -181,5 +181,18 @@ namespace WinterIsComing.Core.Services
                  })
                  .ToListAsync();
         }
+
+        public async Task<Resort> DeleteResortAsync(Resort resort)
+        {
+            resort.Likes.Clear();
+            resort.Comments.Clear();
+            resort.Users.Clear();
+
+            await this.repo.DeleteAsync<Resort>(resort);
+
+            await this.repo.SaveChangesAsync();
+
+            return resort;
+        }
     }
 }

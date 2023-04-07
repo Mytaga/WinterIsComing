@@ -23,5 +23,7 @@ namespace WinterIsComing.Core.Contracts
         Task<ICollection<ResortNameDto>> LoadResortsNamesAsync();
 
         Task<Resort> AddResortAsync(AddResortDto resort);
+
+        Task<Resort> DeleteResortAsync(Resort resort);
     }
 }

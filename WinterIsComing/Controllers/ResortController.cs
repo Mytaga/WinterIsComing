@@ -84,7 +84,6 @@ namespace WinterIsComing.Controllers
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(Resort))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddResort([FromBody] AddResortDto model)
         {
             var result = await this.resortService.AddResortAsync(model);
@@ -102,5 +101,22 @@ namespace WinterIsComing.Controllers
             return Ok(result);
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [HttpDelete("delete/{id}")]
+        [Produces("application/json")]
+        [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> DeleteResort(string id)
+        {
+            var resort = await this.resortService.GetByIdAsync(id);
+
+            if (resort == null)
+            {
+                return BadRequest();
+            }
+            var result = await this.resortService.DeleteResortAsync(resort);
+            return Ok(result);
+        }
     }
 }

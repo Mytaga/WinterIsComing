@@ -188,7 +188,7 @@ namespace WinterIsComing.Core.Services
             resort.Comments.Clear();
             resort.Users.Clear();
 
-            await this.repo.DeleteAsync<Resort>(resort);
+            this.repo.Delete(resort);
 
             await this.repo.SaveChangesAsync();
 

@@ -25,6 +25,7 @@ namespace WinterIsComing.Core.Services
                 Content = model.Content,
                 Author = model.Author,
                 PublishedOn = model.PublishedOn,
+                UserPhoto = model.AuthorImage,
                 ResortId = resort.Id,
                 AppUserId = model.AppUserId,
             };
@@ -78,7 +79,10 @@ namespace WinterIsComing.Core.Services
         {
             var result = new AllCommentsDto();
 
-            var comments = this.repo.AllReadonly<Comment>().Where(c => c.ResortId == resort.Id);
+            var comments = this.repo
+                .AllReadonly<Comment>()
+                .Where(c => c.ResortId == resort.Id)
+                .OrderByDescending(c => c.PublishedOn);
 
             result.Comments = await comments
                 .Select(r => new CommentDto
@@ -86,7 +90,7 @@ namespace WinterIsComing.Core.Services
                     Id = r.Id,
                     Author = r.Author,
                     PublishedOn = r.PublishedOn.ToShortDateString(),
-                    AuthorImageUrl = r.User.ImageUrl,
+                    AuthorImage = r.User.ImageUrl,
                     Content = r.Content,
                     ResortId = resort.Id,
                     AuthorId = r.AppUserId,

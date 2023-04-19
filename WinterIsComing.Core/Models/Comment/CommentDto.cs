@@ -10,7 +10,7 @@
 
         public string PublishedOn { get; set; } = null!;
 
-        public string AuthorImageUrl { get; set; } = null!;
+        public string AuthorImage { get; set; } = null!;
 
         public string ResortId { get; set; } = null!;
 

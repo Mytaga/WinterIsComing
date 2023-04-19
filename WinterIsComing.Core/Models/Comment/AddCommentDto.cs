@@ -18,5 +18,7 @@ namespace WinterIsComing.Core.Models.Comment
 
         public string AppUserId { get; set; } = null!;
 
+        public string AuthorImage { get; set; } = null!;
+
     }
 }

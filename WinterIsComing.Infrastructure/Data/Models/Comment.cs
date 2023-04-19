@@ -30,6 +30,8 @@ namespace WinterIsComing.Infrastructure.Data.Models
 
         public virtual AppUser User { get; set; } = null!;
 
+        public string UserPhoto { get; set; } = null!;
+
         [Required]
         [ForeignKey(nameof(Resort))]
         public string ResortId { get; set; } = null!;

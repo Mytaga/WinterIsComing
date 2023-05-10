@@ -15,3 +15,20 @@ C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Infrastructure\obj
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.pdb
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.genruntimeconfig.cache
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Infrastructure\obj\Debug\net6.0\ref\WinterIsComing.Infrastructure.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Infrastructure.deps.json
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Infrastructure.runtimeconfig.json
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Infrastructure.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Infrastructure.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Common.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\bin\Debug\net6.0\WinterIsComing.Common.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.AssemblyInfo.cs
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.csproj.CopyComplete
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\refint\WinterIsComing.Infrastructure.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\WinterIsComing.Infrastructure.genruntimeconfig.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Infrastructure\obj\Debug\net6.0\ref\WinterIsComing.Infrastructure.dll

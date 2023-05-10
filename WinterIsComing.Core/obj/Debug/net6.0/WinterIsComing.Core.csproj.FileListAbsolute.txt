@@ -15,3 +15,20 @@ C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Core\obj\Debug\net
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Core\obj\Debug\net6.0\refint\WinterIsComing.Core.dll
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.pdb
 C:\Users\mitko\Downloads\WinterIsComing-master\WinterIsComing.Core\obj\Debug\net6.0\ref\WinterIsComing.Core.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Core.deps.json
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Core.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Core.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Common.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Infrastructure.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Infrastructure.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\bin\Debug\net6.0\WinterIsComing.Common.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.csproj.AssemblyReference.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.AssemblyInfoInputs.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.AssemblyInfo.cs
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.csproj.CoreCompileInputs.cache
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.csproj.CopyComplete
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\refint\WinterIsComing.Core.dll
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\WinterIsComing.Core.pdb
+C:\Users\mitko\Downloads\Winter Is Coming\WinterIsComing.Core\obj\Debug\net6.0\ref\WinterIsComing.Core.dll

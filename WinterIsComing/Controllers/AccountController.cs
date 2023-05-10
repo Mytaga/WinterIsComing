@@ -48,7 +48,6 @@ namespace WinterIsComing.Controllers
             }
             catch (Exception ex)
             {
-
                 logger.LogError($"Something went wrong inside the Register action: {ex}");
                 return StatusCode(500, "Internal server error");
             }

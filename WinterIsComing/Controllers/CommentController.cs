@@ -14,11 +14,13 @@ namespace WinterIsComing.Controllers
     {
         private readonly ICommentService commentService;
         private readonly IResortService resortService;
+        private readonly ILogger logger;
 
-        public CommentController(ICommentService commentService, IResortService resortService)
+        public CommentController(ICommentService commentService, IResortService resortService, ILogger<CommentController> logger)
         {
             this.commentService = commentService;
             this.resortService = resortService;
+            this.logger = logger;
         }
 
         [HttpGet("getResortComments/{id}")]
@@ -29,14 +31,22 @@ namespace WinterIsComing.Controllers
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
-            if (resort == null)
+            try
             {
-                return NotFound();
+                if (resort == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await this.commentService.GetResortComments(resort);
+
+                return Ok(result);
             }
-
-            var result = await this.commentService.GetResortComments(resort);
-
-            return Ok(result);
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the GetResortsComments action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }           
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -45,24 +55,32 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> AddComment(string id, [FromBody]AddCommentDto model)
+        public async Task<IActionResult> Add(string id, [FromBody]AddCommentDto model)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
-            if (resort == null)
+            try
             {
-                return NotFound();
+                if (resort == null)
+                {
+                    return NotFound();
+                }
+
+
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ExceptionErrors.InvalidModel);
+                }
+
+                await this.commentService.AddComment(model, resort);
+
+                return Ok(model);
             }
-
-
-            if (!ModelState.IsValid)
+            catch (Exception ex)
             {
-                return BadRequest(ExceptionErrors.InvalidModel);
+                logger.LogError($"Something went wrong inside the Add action: {ex}");
+                return StatusCode(500, "Internal server error");
             }
-
-            await this.commentService.AddComment(model, resort);
-
-            return Ok(model);
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -74,14 +92,22 @@ namespace WinterIsComing.Controllers
         {
             var comment = await this.commentService.GetById(id);
 
-            if (comment == null)
+            try
             {
-                return NotFound();
+                if (comment == null)
+                {
+                    return NotFound();
+                }
+
+                await this.commentService.EditComment(model, comment);
+
+                return Ok(model);
             }
-
-            await this.commentService.EditComment(model, comment);
-
-            return Ok(model);
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the Edit action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }       
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -92,12 +118,20 @@ namespace WinterIsComing.Controllers
         {
             var result = await this.commentService.GetById(id);
 
-            if (result == null)
+            try
             {
-                return BadRequest();
-            }
+                if (result == null)
+                {
+                    return BadRequest();
+                }
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the GetComment action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -109,19 +143,27 @@ namespace WinterIsComing.Controllers
         {
             var resort = await this.resortService.GetByIdAsync(resortId);
 
-            if (resort == null)
+            try
             {
-                return NotFound();
-            }
+                if (resort == null)
+                {
+                    return NotFound();
+                }
 
-            if (userId == null)
+                if (userId == null)
+                {
+                    return Unauthorized();
+                }
+
+                var result = await this.commentService.DeleteComment(resort, userId);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
             {
-                return Unauthorized();
+                logger.LogError($"Something went wrong inside the Delete action: {ex}");
+                return StatusCode(500, "Internal server error");
             }
-
-            var result = await this.commentService.DeleteComment(resort, userId);
-
-            return Ok(result);
         }
     }
 }

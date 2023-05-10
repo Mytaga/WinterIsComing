@@ -11,10 +11,12 @@ namespace WinterIsComing.Controllers
     public class PriceController : ControllerBase
     {
         private readonly IPriceService priceService;
+        private readonly ILogger logger;
 
-        public PriceController(IPriceService priceService)
+        public PriceController(IPriceService priceService, ILogger<PriceController> logger)
         {
             this.priceService = priceService;
+            this.logger = logger;   
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

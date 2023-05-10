@@ -74,5 +74,16 @@ namespace WinterIsComing.Common.Constants
             public const string ContentMinLengthErrorMsg = "Content must be at least 10 characters!";
             public const string ContentMaxLengthErrorMsg = "Content must be no more than 300 characters!";
         }
+
+        public static class PriceValidation 
+        {
+            public const int ValueMin = 0;
+            public const int ValueMax = 10000;
+
+            public const string PriceValueIsRequiredErrorMsg = "Value is required!";
+            public const string PriceValueMinError = "Value must me more than 0!";
+
+            public const string PriceValueMaxError = "Value must be no more than 10000!";
+        }
     }
 }

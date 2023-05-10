@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc;
 using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models;
-using WinterIsComing.Extensions;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
@@ -16,11 +15,14 @@ namespace WinterIsComing.Controllers
     {
         private readonly IUserService userService;
         private readonly SignInManager<AppUser> signInManager;
+        private readonly ILogger logger;
 
-        public AccountController(IUserService userService, SignInManager<AppUser> signInManager)
+        public AccountController(IUserService userService, SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
         {
             this.userService = userService;
             this.signInManager = signInManager;
+            this.logger = logger;
+
         }
 
         [HttpPost("register")]
@@ -28,19 +30,28 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Register([FromBody] RegisterDto model)
         {
-            if (!this.ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!this.ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                var result = await this.userService.Register(model);
+
+                if (!result.Succeeded)
+                {
+                    return Ok(result.Errors);
+                }
+
+                return this.StatusCode(201);
             }
-
-            var result = await this.userService.Register(model);
-
-            if (!result.Succeeded)
+            catch (Exception ex)
             {
-                return Ok(result.Errors);
-            }
 
-            return this.StatusCode(201);
+                logger.LogError($"Something went wrong inside the Register action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [HttpPost("login")]
@@ -50,16 +61,25 @@ namespace WinterIsComing.Controllers
         {
             var user = await this.userService.Authenticate(model.Email, model.Password);
 
-            if (user == null)
+            try
             {
-                return BadRequest(new { message = ExceptionErrors.LoginError });
+                if (user == null)
+                {
+                    return BadRequest(new { message = ExceptionErrors.LoginError });
+                }
+
+                var tokenString = this.userService.GenerateJSONWebToken(user);
+
+                await this.signInManager.SignInAsync(user, true);
+
+                return Ok(new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl, firstName = user.FirstName, lastName = user.LastName, email = user.Email });
+
             }
-
-            var tokenString = this.userService.GenerateJSONWebToken(user);
-
-            await this.signInManager.SignInAsync(user, true);
-
-            return Ok( new { token = tokenString, userName = user.UserName, id = user.Id, image = user.ImageUrl, firstName = user.FirstName, lastName = user.LastName, email = user.Email });    
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the Login action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -79,14 +99,22 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ViewProfile(string id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await this.userService.GetUserProfile(id);
+
+                return Ok(result);
             }
-
-            var result = await this.userService.GetUserProfile(id);
-
-            return Ok(result);
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the ViewProfile action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -96,14 +124,22 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
         {
-            if (id == null)
+            try
             {
-                return NotFound();
+                if (id == null)
+                {
+                    return NotFound();
+                }
+
+                var result = await this.userService.UpdateProfile(model, id);
+
+                return Ok(result);
             }
-
-            var result = await this.userService.UpdateProfile(model, id);
-
-            return Ok(result);
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the Login action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }
         }
     }
 }

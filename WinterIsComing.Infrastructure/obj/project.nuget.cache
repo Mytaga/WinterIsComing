@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+FTV1szhQTLpgUMRQk6hozB/5ePSb0kbsYjpq5oqPjS24VWBsg+fak0xkHGnQ1TgGZnJ4GO20DZ04HW1BqdM8A==",
+  "dgSpecHash": "LecRjVe91LDH0BU/ouXXfQFZEy/SoYGsEm5VncQKwfc7mJGOAT73bzRJiJ5YjklPUYd6xVBaXSCoZML41+1DKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mitko\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\mitko\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

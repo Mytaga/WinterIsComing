@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "kkIzVfiTJLTMl27/PEOb05Rs0xuR8ERw6omcjsKlYLkY82sVQhiUHe5k2XTU5qOOzo2fq1SyP8kv7WZ5CjCiPg==",
+  "dgSpecHash": "7eKKkDwCJPZB4EShktsdQzjhCcfvHU8oCNx7COuwu8OSKkR+earqUkLcyV1ErafpX1c7Y5VFi6Z0X9osCionOA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
+  "projectFilePath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mitko\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.13\\microsoft.aspnetcore.authentication.jwtbearer.6.0.13.nupkg.sha512",
     "C:\\Users\\mitko\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.13\\microsoft.aspnetcore.cryptography.internal.6.0.13.nupkg.sha512",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ZFaGhaA7f6xZ8uQmbBoAWIgR00gLshkSm72tyhhVsouU3rQLGdw0igBze7sTd7r0lQVOV31dhKb5uajINRd4FQ==",
+  "dgSpecHash": "Ed5o+4wCefuwjr9ArKu02BH/ptlDdryh1E6JeYUCBQG0HMLcR7opwYWeI3pfOKxqCl0Eg2sG1j4SQO3fUcSkSQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
+  "projectFilePath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mitko\\.nuget\\packages\\castle.core\\4.4.1\\castle.core.4.4.1.nupkg.sha512",
     "C:\\Users\\mitko\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",

@@ -1737,11 +1737,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
+      "projectUniqueName": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
       "projectName": "WinterIsComing.Common",
-      "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
+      "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
       "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\obj\\",
+      "outputPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -1807,7 +1807,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }

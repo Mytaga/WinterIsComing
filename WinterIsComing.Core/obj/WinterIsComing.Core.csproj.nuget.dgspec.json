@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\WinterIsComing.Core.csproj": {}
+    "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\WinterIsComing.Core.csproj": {}
   },
   "projects": {
-    "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj": {
+    "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
+        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
         "projectName": "WinterIsComing.Common",
-        "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
+        "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\obj\\",
+        "outputPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -81,14 +81,14 @@
         }
       }
     },
-    "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\WinterIsComing.Core.csproj": {
+    "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\WinterIsComing.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
+        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
         "projectName": "WinterIsComing.Core",
-        "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
+        "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\WinterIsComing.Core.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Core\\obj\\",
+        "outputPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Core\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -105,8 +105,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj"
+              "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj"
               }
             }
           }
@@ -162,14 +162,14 @@
         }
       }
     },
-    "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj": {
+    "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
         "projectName": "WinterIsComing.Infrastructure",
-        "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\WinterIsComing.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\mitko\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\mitko\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -186,8 +186,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj": {
-                "projectPath": "C:\\Users\\mitko\\Downloads\\WinterIsComing-master\\WinterIsComing.Common\\WinterIsComing.Common.csproj"
+              "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj": {
+                "projectPath": "C:\\Users\\mitko\\Downloads\\Winter Is Coming\\WinterIsComing.Common\\WinterIsComing.Common.csproj"
               }
             }
           }

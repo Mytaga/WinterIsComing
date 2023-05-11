@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Country;
 using WinterIsComing.Core.Models.Resort;
-using WinterIsComing.Extensions;
 using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
@@ -14,10 +14,12 @@ namespace WinterIsComing.Controllers
     public class ResortController : ControllerBase
     {
         private readonly IResortService resortService;
+        private readonly ILogger<ResortController> logger;
 
-        public ResortController(IResortService resortService)
+        public ResortController(IResortService resortService, ILogger<ResortController> logger)
         {
             this.resortService = resortService;
+            this.logger = logger;
         }
 
         [HttpGet("getAll")]
@@ -26,8 +28,18 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetAll([FromQuery] string? country, string? searchQuery)
         {
-            var result = await this.resortService.GetAllAsync(country, searchQuery);
-            return Ok(result);
+            try
+            {
+                var result = await this.resortService.GetAllAsync(country, searchQuery);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.GetAll, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -42,9 +54,18 @@ namespace WinterIsComing.Controllers
                 return BadRequest();
             }
 
-            var result = await this.resortService.GetLikedAsync(userId);
+            try
+            {
+                var result = await this.resortService.GetLikedAsync(userId);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.GetLiked, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [HttpGet("details/{id}")]
@@ -53,9 +74,20 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> Details(string id)
         {
-            var resort = await this.resortService.GetByIdAsync(id);
-            var result = await this.resortService.GetResortDetailsAsync(resort);
-            return Ok(result);
+            try
+            {
+                var resort = await this.resortService.GetByIdAsync(id);
+
+                var result = await this.resortService.GetResortDetailsAsync(resort);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.Details, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [HttpGet("topLiked")]
@@ -64,8 +96,18 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> TopLiked()
         {
-            var result = await this.resortService.TopLiked();
-            return Ok(result);
+            try
+            {
+                var result = await this.resortService.TopLiked();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.TopLiked, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [HttpGet("loadCountries")]
@@ -74,9 +116,18 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(500)]
         public async Task<IActionResult> GetCountries()
         {
-            var result = await this.resortService.LoadCountriesAsync();
+            try
+            {
+                var result = await this.resortService.LoadCountriesAsync();
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.GetCountries, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -86,19 +137,38 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddResort([FromBody] AddResortDto model)
         {
-            var result = await this.resortService.AddResortAsync(model);
+            try
+            {
+                var result = await this.resortService.AddResortAsync(model);
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.AddResort, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
-        [HttpGet("getResortNames")]
+        [HttpGet("getResortsNames")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortNameDto))]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetResortNames()
+        public async Task<IActionResult> GetResortsNames()
         {
-            var result = await this.resortService.LoadResortsNamesAsync();
-            return Ok(result);
+            try
+            {
+                var result = await this.resortService.LoadResortsNamesAsync();
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.GetNames, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -115,8 +185,19 @@ namespace WinterIsComing.Controllers
             {
                 return BadRequest();
             }
-            var result = await this.resortService.DeleteResortAsync(resort);
-            return Ok(result);
+
+            try
+            {
+                var result = await this.resortService.DeleteResortAsync(resort);
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.DeleteResort, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
     }
 }

@@ -51,9 +51,6 @@ namespace WinterIsComing
 
             var app = builder.Build();
 
-            var logger = app.Services.GetRequiredService<ILogger>();
-            app.ConfigureExceptionHandler(logger);
-
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {

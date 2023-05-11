@@ -15,14 +15,13 @@ namespace WinterIsComing.Controllers
     {
         private readonly IUserService userService;
         private readonly SignInManager<AppUser> signInManager;
-        private readonly ILogger logger;
+        private readonly ILogger<AccountController> logger;
 
         public AccountController(IUserService userService, SignInManager<AppUser> signInManager, ILogger<AccountController> logger)
         {
             this.userService = userService;
             this.signInManager = signInManager;
             this.logger = logger;
-
         }
 
         [HttpPost("register")]
@@ -48,8 +47,9 @@ namespace WinterIsComing.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Register action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.Register, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
 
@@ -76,8 +76,9 @@ namespace WinterIsComing.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Login action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.Login, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
 
@@ -86,9 +87,18 @@ namespace WinterIsComing.Controllers
         [HttpPost("logout")]
         public async Task<IActionResult> Logout()
         {
-            await this.signInManager.SignOutAsync();
+            try
+            {
+                await this.signInManager.SignOutAsync();
 
-            return Ok();
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.Logout, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -98,21 +108,22 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> ViewProfile(string id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
                 var result = await this.userService.GetUserProfile(id);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the ViewProfile action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.ViewProfile, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
 
@@ -123,21 +134,22 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (id == null)
-                {
-                    return NotFound();
-                }
-
                 var result = await this.userService.UpdateProfile(model, id);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Login action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.Update, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
     }

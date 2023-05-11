@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Price;
 
@@ -11,7 +12,7 @@ namespace WinterIsComing.Controllers
     public class PriceController : ControllerBase
     {
         private readonly IPriceService priceService;
-        private readonly ILogger logger;
+        private readonly ILogger<PriceController> logger;
 
         public PriceController(IPriceService priceService, ILogger<PriceController> logger)
         {
@@ -26,21 +27,21 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> AddPrice([FromBody] AddPriceDto model)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
-
                 await this.priceService.AddPriceAsync(model);
 
                 return Ok(model);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Add action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.AddPrice, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }          
         }
     }

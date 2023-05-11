@@ -14,7 +14,7 @@ namespace WinterIsComing.Controllers
     {
         private readonly ICommentService commentService;
         private readonly IResortService resortService;
-        private readonly ILogger logger;
+        private readonly ILogger<CommentController> logger;
 
         public CommentController(ICommentService commentService, IResortService resortService, ILogger<CommentController> logger)
         {
@@ -31,21 +31,22 @@ namespace WinterIsComing.Controllers
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
+            if (resort == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (resort == null)
-                {
-                    return NotFound();
-                }
-
                 var result = await this.commentService.GetResortComments(resort);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the GetResortsComments action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.GetResortComments, ex); 
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }           
         }
 
@@ -55,31 +56,31 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Add(string id, [FromBody]AddCommentDto model)
+        public async Task<IActionResult> AddComment(string id, [FromBody]AddCommentDto model)
         {
             var resort = await this.resortService.GetByIdAsync(id);
 
+            if (resort == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ExceptionErrors.InvalidModel);
+            }
+
             try
             {
-                if (resort == null)
-                {
-                    return NotFound();
-                }
-
-
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ExceptionErrors.InvalidModel);
-                }
-
                 await this.commentService.AddComment(model, resort);
 
                 return Ok(model);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Add action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.AddComment, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
 
@@ -92,21 +93,22 @@ namespace WinterIsComing.Controllers
         {
             var comment = await this.commentService.GetById(id);
 
+            if (comment == null)
+            {
+                return NotFound();
+            }
+
             try
             {
-                if (comment == null)
-                {
-                    return NotFound();
-                }
-
                 await this.commentService.EditComment(model, comment);
 
                 return Ok(model);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Edit action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.EditComment, ex); 
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }       
         }
 
@@ -129,8 +131,9 @@ namespace WinterIsComing.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the GetComment action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.GetComment, ex); 
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
 
@@ -139,30 +142,31 @@ namespace WinterIsComing.Controllers
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(CommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Delete(string resortId, string userId)
+        public async Task<IActionResult> DeleteComment(string resortId, string userId)
         {
             var resort = await this.resortService.GetByIdAsync(resortId);
 
+            if (resort == null)
+            {
+                return NotFound();
+            }
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
             try
             {
-                if (resort == null)
-                {
-                    return NotFound();
-                }
-
-                if (userId == null)
-                {
-                    return Unauthorized();
-                }
-
                 var result = await this.commentService.DeleteComment(resort, userId);
 
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                logger.LogError($"Something went wrong inside the Delete action: {ex}");
-                return StatusCode(500, "Internal server error");
+                logger.LogError(Constants.DeleteComment, ex);
+
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
     }

@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using WinterIsComing.Common.Constants;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Models.Like;
-using WinterIsComing.Extensions;
 
 namespace WinterIsComing.Controllers
 {
@@ -13,11 +13,13 @@ namespace WinterIsComing.Controllers
     {
         private readonly ILikeService likeService;
         private readonly IResortService resortService;
+        private readonly ILogger<LikeController> logger;
 
-        public LikeController(ILikeService likeService, IResortService resortService)
+        public LikeController(ILikeService likeService, IResortService resortService, ILogger<LikeController> logger)
         {
             this.likeService = likeService;
             this.resortService = resortService;
+            this.logger = logger;
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -39,9 +41,16 @@ namespace WinterIsComing.Controllers
                 return BadRequest();
             }
 
-            var result = await this.likeService.LikeResort(resort, userId);
-
-            return Ok(result);
+            try
+            {
+                var result = await this.likeService.LikeResort(resort, userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.LikeResort, ex);
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }         
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
@@ -63,9 +72,16 @@ namespace WinterIsComing.Controllers
                 return BadRequest();
             }
 
-            var result = await this.likeService.UnlikeResort(resort, userId);
-
-            return Ok(result);
+            try
+            {
+                var result = await this.likeService.UnlikeResort(resort, userId);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.UnlikeResort, ex); ;
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
+            }
         }
 
         [HttpGet("getResortLikes/{id}")]
@@ -79,9 +95,16 @@ namespace WinterIsComing.Controllers
                 return BadRequest();
             }
 
-            var result = await this.likeService.LoadAllResortLikesAsync(id);
-
-            return Ok(result);
+            try
+            {
+                var result = await this.likeService.LoadAllResortLikesAsync(id);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(Constants.GetResortLikes, ex); ;
+                throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex); ;
+            }          
         }
     }
 }

@@ -9,7 +9,7 @@ namespace WinterIsComing.Core.Models
         [EmailAddress]
         public string Email { get; set; } = null!;
 
-        [Required]
+        [Required(ErrorMessage = ModelValidationConstants.AppUserValidation.PasswordIsRequiredErrorMsg)]
         [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
     }

@@ -1,5 +1,4 @@
-﻿using System.Data;
-
+﻿
 namespace WinterIsComing.Common.Constants
 {
     public static class ModelValidationConstants
@@ -82,8 +81,9 @@ namespace WinterIsComing.Common.Constants
 
             public const string PriceValueIsRequiredErrorMsg = "Value is required!";
             public const string PriceValueMinError = "Value must me more than 0!";
-
             public const string PriceValueMaxError = "Value must be no more than 10000!";
+            public const string PassTypeIsRequiredErrorMsg = "Pass type is required!";
+            public const string ResortIsRequiredErrorMsg = "Resort is required!";
         }
     }
 }

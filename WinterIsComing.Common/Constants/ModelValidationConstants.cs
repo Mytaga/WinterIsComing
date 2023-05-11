@@ -55,6 +55,7 @@ namespace WinterIsComing.Common.Constants
             public const string FirstNameIsRequiredErrorMsg = "First Name is required!";
             public const string LastNameIsRequiredErrorMsg = "Last Name is required!";
             public const string UsernameIsRequiredErrorMsg = "Username is required!";
+            public const string EmailIsRequiredErrorMsg = "Email is required!";
             public const string FirstNameMinLengthErrorMsg = "First Name length must be at least 2 characters!";
             public const string FirstNameMaxLengthErrorMsg = "First Name length must be no more than 30 characters!";
             public const string LastNameMinLengthErrorMsg = "Last Name length must be at least 2 characters!";

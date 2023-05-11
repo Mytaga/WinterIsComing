@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using WinterIsComing.Common.Constants;
 
 namespace WinterIsComing.Core.Models
 {
     public class LoginDto
     {
-        [Required]
+        [Required(ErrorMessage = ModelValidationConstants.AppUserValidation.EmailIsRequiredErrorMsg)]
         [EmailAddress]
         public string Email { get; set; } = null!;
 

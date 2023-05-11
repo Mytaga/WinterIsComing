@@ -24,12 +24,24 @@ namespace WinterIsComing.Controllers
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddPriceDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> AddPrice([FromBody] AddPriceDto model)
         {
-            await this.priceService.AddPriceAsync(model);
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
 
-            return Ok(model);
+                await this.priceService.AddPriceAsync(model);
+
+                return Ok(model);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Something went wrong inside the Add action: {ex}");
+                return StatusCode(500, "Internal server error");
+            }          
         }
     }
 }

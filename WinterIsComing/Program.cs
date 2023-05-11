@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using WinterIsComing.Extensions;
 
 namespace WinterIsComing
 {
@@ -50,11 +51,14 @@ namespace WinterIsComing
 
             var app = builder.Build();
 
+            var logger = app.Services.GetRequiredService<ILogger>();
+            app.ConfigureExceptionHandler(logger);
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(); 
             }
 
             app.UseCors("all");

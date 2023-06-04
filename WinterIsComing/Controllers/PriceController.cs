@@ -7,7 +7,7 @@ using WinterIsComing.Core.Models.Price;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/price")]
     [ApiController]
     public class PriceController : ControllerBase
     {
@@ -21,7 +21,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("add")]
+        [HttpPost]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddPriceDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

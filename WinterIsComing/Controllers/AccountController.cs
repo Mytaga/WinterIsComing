@@ -9,7 +9,7 @@ using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/account")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -102,20 +102,20 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("viewProfile/{id}")]
+        [HttpGet("{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> ViewProfile(string id)
+        public async Task<IActionResult> ViewProfile(string userId)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return NotFound();
             }
 
             try
             {
-                var result = await this.userService.GetUserProfile(id);
+                var result = await this.userService.GetUserProfile(userId);
 
                 return Ok(result);
             }
@@ -128,20 +128,20 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut("updateProfile/{id}")]
+        [HttpPut("{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(UserProfileDto))]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string id)
+        public async Task<IActionResult> Update([FromBody] UpdateUserProfileDto model, string userId)
         {
-            if (id == null)
+            if (userId == null)
             {
                 return NotFound();
             }
 
             try
             {
-                var result = await this.userService.UpdateProfile(model, id);
+                var result = await this.userService.UpdateProfile(model, userId);
 
                 return Ok(result);
             }

@@ -8,7 +8,7 @@ using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/comment")]
     [ApiController]
     public class CommentController : ControllerBase
     {
@@ -23,13 +23,13 @@ namespace WinterIsComing.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("getResortComments/{id}")]
+        [HttpGet("{resortId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllCommentsDto))]
         [ProducesResponseType(500)]
-        public async Task<IActionResult> GetResortComments(string id)
+        public async Task<IActionResult> GetResortComments(string resortId)
         {
-            var resort = await this.resortService.GetByIdAsync(id);
+            var resort = await this.resortService.GetByIdAsync(resortId);
 
             if (resort == null)
             {
@@ -51,7 +51,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("add/{id}")]
+        [HttpPost("{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AddCommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -85,7 +85,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPut("edit/{id}")]
+        [HttpPut("{id}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(CommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -113,7 +113,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("getComment/{id}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(Comment))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public async Task<IActionResult> GetComment(string id)
@@ -138,7 +138,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete("delete/{resortId}/{userId}")]
+        [HttpDelete("{resortId}/{userId}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(CommentDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

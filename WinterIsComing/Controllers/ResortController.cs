@@ -9,7 +9,7 @@ using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/resort")]
     [ApiController]
     public class ResortController : ControllerBase
     {
@@ -22,7 +22,7 @@ namespace WinterIsComing.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("getAll")]
+        [HttpGet]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -43,7 +43,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("getLiked/{userId}")]
+        [HttpGet("{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -68,7 +68,7 @@ namespace WinterIsComing.Controllers
             }
         }
 
-        [HttpGet("details/{id}")]
+        [HttpGet("{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortDetailsDto))]
         [ProducesResponseType(500)]
@@ -90,7 +90,7 @@ namespace WinterIsComing.Controllers
             }
         }
 
-        [HttpGet("topLiked")]
+        [HttpGet("top")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]
@@ -110,7 +110,7 @@ namespace WinterIsComing.Controllers
             }
         }
 
-        [HttpGet("loadCountries")]
+        [HttpGet("countries")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<CountryDto>))]
         [ProducesResponseType(500)]
@@ -131,7 +131,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("add")]
+        [HttpPost]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(Resort))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -151,7 +151,7 @@ namespace WinterIsComing.Controllers
             }
         }
 
-        [HttpGet("getResortsNames")]
+        [HttpGet("names")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortNameDto))]
         [ProducesResponseType(500)]
@@ -172,7 +172,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ResortDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

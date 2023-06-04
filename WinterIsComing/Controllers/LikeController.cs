@@ -7,7 +7,7 @@ using WinterIsComing.Core.Models.Like;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/like")]
     [ApiController]
     public class LikeController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpPost("like/{id}/{userId}")]
+        [HttpPost("{id}/{userId}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(LikeDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -54,7 +54,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpDelete("unlike/{id}/{userId}")]
+        [HttpDelete("{id}/{userId}")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(LikeDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -84,20 +84,20 @@ namespace WinterIsComing.Controllers
             }
         }
 
-        [HttpGet("getResortLikes/{id}")]
+        [HttpGet("{resortId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(ICollection<LikeDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public async Task<IActionResult> GetResortLikes(string id)
+        public async Task<IActionResult> GetResortLikes(string resortId)
         {
-            if (id == null)
+            if (resortId == null)
             {
                 return BadRequest();
             }
 
             try
             {
-                var result = await this.likeService.LoadAllResortLikesAsync(id);
+                var result = await this.likeService.LoadAllResortLikesAsync(resortId);
                 return Ok(result);
             }
             catch (Exception ex)

@@ -9,7 +9,7 @@ using WinterIsComing.Infrastructure.Data.Models;
 
 namespace WinterIsComing.Controllers
 {
-    [Route("api/resort")]
+    [Route("api/resorts")]
     [ApiController]
     public class ResortController : ControllerBase
     {

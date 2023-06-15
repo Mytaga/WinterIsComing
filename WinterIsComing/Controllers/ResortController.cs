@@ -43,7 +43,7 @@ namespace WinterIsComing.Controllers
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [HttpGet("{userId}")]
+        [HttpGet("mine/{userId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllResortsDto))]
         [ProducesResponseType(500)]

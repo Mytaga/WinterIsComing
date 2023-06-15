@@ -23,7 +23,7 @@ namespace WinterIsComing.Controllers
             this.logger = logger;
         }
 
-        [HttpGet("{resortId}")]
+        [HttpGet("all/{resortId}")]
         [Produces("application/json")]
         [ProducesResponseType(200, StatusCode = StatusCodes.Status200OK, Type = typeof(AllCommentsDto))]
         [ProducesResponseType(500)]
@@ -170,7 +170,5 @@ namespace WinterIsComing.Controllers
                 throw new ApplicationException(ExceptionErrors.ExceptionMessage, ex);
             }
         }
-
-        // Test Signed Commit
     }
 }

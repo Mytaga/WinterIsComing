@@ -1,4 +1,4 @@
-﻿    using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WinterIsComing.Core.Contracts;
 using WinterIsComing.Core.Services;
